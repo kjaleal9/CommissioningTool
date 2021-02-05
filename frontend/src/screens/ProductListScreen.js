@@ -73,10 +73,7 @@ const ProductListScreen = ({ history, match }) => {
         <>
             <Row className='align-items-center'>
                 <Col md={3}>
-                    <h1>Products</h1>
-                </Col>
-                <Col md={6}>
-                    <SearchBox history={history} />
+                    <h1>Control Modules</h1>
                 </Col>
                 <Col className='text-right' md={3}>
                     <Button className='my-3' onClick={createProductHandler}>
@@ -144,7 +141,7 @@ const ProductListScreen = ({ history, match }) => {
                             ))}
                         </tbody>
                     </Table>
-                    <Paginate pages={pages} page={page} isAdmin={true} />
+
                 </>
             )}
         </>
