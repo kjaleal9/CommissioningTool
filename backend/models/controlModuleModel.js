@@ -1,55 +1,81 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-const replySchema = mongoose.Schema({
-  comment: { type: String, required: true },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'User',
-  },
-})
+const commentSchema = mongoose.Schema(
+    {
+        comment: { type: String, required: true },
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User',
+        },
+    },
+    {
+        timestamps: true,
+    }
+);
 
 const ticketSchema = mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    priority: { type: String, required: true },
-    issueType: { type: String, required: true },
-    comment: { type: String, required: true },
-    replies: [replySchema],
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'User',
+    {
+        name: { type: String, required: true },
+        priority: { type: String, required: true },
+        issueType: { type: String, required: true },
+        text: { type: String, required: true },
+        comments: [commentSchema],
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User',
+        },
+        isResolved: { type: Boolean, required: true, default: false },
+        resolvedAt: { type: Date },
     },
-    isResolved: { type: Boolean, required: true, default: false },
-    resolvedAt: { type: Date },
-  },
-  {
-    timestamps: true,
-  }
-)
+    {
+        timestamps: true,
+    }
+);
 
 const controlModuleSchema = mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        area: {
+            type: String,
+            required: true,
+        },
+        deviceType: {
+            type: String,
+            required: true,
+        },
+        status: {
+            completed: {
+                type: Boolean,
+                default: false,
+            },
+            mechanical: {
+                type: Boolean,
+                default: false,
+            },
+            electrical: {
+                type: Boolean,
+                default: false,
+            },
+            automation: {
+                type: Boolean,
+                default: false,
+            },
+        },
+        comment: {
+            type: String,
+        },
+        tickets: [ticketSchema],
     },
-    area: {
-      type: String,
-      required: true,
-    },
-    comment: {
-      type: String,
-      required: true,
-    },
-    tickets: [ticketSchema],
-  },
-  {
-    timestamps: true,
-  }
-)
+    {
+        timestamps: true,
+    }
+);
 
-const ControlModule = mongoose.model('ControlModule', controlModuleSchema)
+const ControlModule = mongoose.model('ControlModule', controlModuleSchema);
 
-export default ControlModule
+export default ControlModule;

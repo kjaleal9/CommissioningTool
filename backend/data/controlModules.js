@@ -1,21 +1,25 @@
-export const controlModules = [
-  {
-    name: 'ZS20500',
-    area: 'Cream',
-    tickets: [
-      {
-        name: 'ZS20500',
-        priority: 'High',
-        issueType: 'Electrical',
-        comment: 'The proximity switch is broken',
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-          ref: 'User',
+const controlModules = [
+    {
+        name: 'V20500',
+        area: 'Cream',
+        deviceType: 'Valve',
+    },
+    {
+        name: 'AG20501',
+        area: 'Separator',
+        deviceType: 'Motor',
+        status: {
+            completed: true,
         },
-        isResolved: { type: Boolean, required: true, default: false },
-        resolvedAt: { type: Date },
-      },
-    ],
-  },
-]
+    },
+    {
+        name: 'ZS20502',
+        area: 'Batching',
+        deviceType: 'Digital Input',
+        status: {
+            electrical: true,
+        },
+    },
+];
+
+export default controlModules;
