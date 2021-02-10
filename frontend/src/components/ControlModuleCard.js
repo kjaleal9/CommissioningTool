@@ -1,5 +1,5 @@
-import React from 'react';
-import { Badge, Button, Card, Nav } from 'react-bootstrap';
+import React, { Fragment, useState } from 'react';
+import { Badge, Button, Card, Collapse, Nav } from 'react-bootstrap';
 
 const ControlModuleCard = ({
     name,
@@ -9,6 +9,8 @@ const ControlModuleCard = ({
     createdAt,
     status,
 }) => {
+    const [open, setOpen] = useState(false);
+
     return (
         <Card
             border={
@@ -25,7 +27,7 @@ const ControlModuleCard = ({
             <Card.Header>
                 <Card.Title className='d-flex align-items-center justify-content-between'>
                     {name}
-                    <Button variant='primary'>Go To</Button>
+                    <Button variant='primary'>View</Button>
                 </Card.Title>
                 <Card.Subtitle className='my-2'>Area: {area}</Card.Subtitle>
                 <Card.Subtitle className='my-2'>
@@ -38,7 +40,23 @@ const ControlModuleCard = ({
                     <Badge variant='info'>In Progress</Badge>
                 )}
             </Card.Header>
-            <Card.Body>{comment && <Card.Text>{comment}</Card.Text>}</Card.Body>
+
+            <Card.Body>
+                {comment && (
+                    <Fragment>
+                        <Button
+                            onClick={() => setOpen(!open)}
+                            aria-controls='example-collapse-text'
+                            aria-expanded={open}
+                        >
+                            click
+                        </Button>
+                        <Collapse in={open}>
+                            <Card.Text>{comment}</Card.Text>
+                        </Collapse>
+                    </Fragment>
+                )}
+            </Card.Body>
 
             <Card.Footer>
                 <small className='text-muted'>Created: {createdAt}</small>
