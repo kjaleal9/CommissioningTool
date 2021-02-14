@@ -21,11 +21,7 @@ const ticketSchema = mongoose.Schema(
         issueType: { type: String, required: true },
         text: { type: String, required: true },
         comments: [commentSchema],
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'User',
-        },
+
         isResolved: { type: Boolean, required: true, default: false },
         resolvedAt: { type: Date },
     },

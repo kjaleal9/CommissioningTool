@@ -5,6 +5,7 @@ import {
     CardDeck,
     Collapse,
     Pagination,
+    Row,
     Table,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -42,7 +43,7 @@ const ControlModuleScreen = () => {
             ) : error ? (
                 <Message variant='danger'>{error}</Message>
             ) : (
-                <CardDeck>
+                <Row className='m-auto'>
                     {controlModules.map(controlModule => (
                         <ControlModuleCard
                             name={controlModule.name}
@@ -53,9 +54,10 @@ const ControlModuleScreen = () => {
                             deviceType={controlModule.deviceType}
                             createdAt={controlModule.createdAt}
                             status={controlModule.status}
+                            tickets={controlModule.tickets}
                         />
                     ))}
-                </CardDeck>
+                </Row>
             )}
             <Pagination className='mt-3'>
                 <Pagination.First />

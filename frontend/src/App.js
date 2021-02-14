@@ -33,7 +33,7 @@ function App() {
                         </svg>
                     </div>
 
-                    <Container>
+                    <Container fluid>
                         <Route
                             path='/controlModules'
                             component={ControlModuleScreen}

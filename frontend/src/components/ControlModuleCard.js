@@ -8,13 +8,20 @@ const ControlModuleCard = ({
     comment,
     createdAt,
     status,
+    tickets,
 }) => {
     const [open, setOpen] = useState(false);
-
+    console.log(Boolean(tickets.length));
     return (
         <Card
             border={
-                status.completed
+                tickets.length
+                    ? tickets[0].priority === 'High'
+                        ? 'danger'
+                        : tickets.priority[0] === 'Medium'
+                        ? 'warning'
+                        : 'info'
+                    : status.completed
                     ? 'success'
                     : status.mechanical ||
                       status.electrical ||
@@ -22,7 +29,8 @@ const ControlModuleCard = ({
                     ? 'info'
                     : 'primary'
             }
-            className='overflow-hidden'
+            className='overflow-hidden m-3'
+            style={{ width: '18rem' }}
         >
             <Card.Header>
                 <Card.Title className='d-flex align-items-center justify-content-between'>
@@ -39,6 +47,19 @@ const ControlModuleCard = ({
                     status.automation) && (
                     <Badge variant='info'>In Progress</Badge>
                 )}
+                <Nav variant='tabs' defaultActiveKey='#first'>
+                    <Nav.Item>
+                        <Nav.Link href='#first'>Mechanical</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link href='#link'>Electrical</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link href='#disabled' disabled>
+                            Automation
+                        </Nav.Link>
+                    </Nav.Item>
+                </Nav>
             </Card.Header>
 
             <Card.Body>
