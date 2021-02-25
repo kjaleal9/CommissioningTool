@@ -1,109 +1,56 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Form, Button, Card } from 'react-bootstrap'
+import { Form, Button, Card, Badge } from 'react-bootstrap'
 import { Fragment } from 'react'
-import { tickets } from '../files/tickets'
 
-const ProductEditScreen = ({ match, history }) => {
+import { getControlModules } from '../actions/controlModuleActions'
+
+const TicketScreen = ({ match, history }) => {
   const area = match.params.area
+  const controlModuleList = useSelector((state) => state.controlModuleList)
+  const { loading, controlModules, error } = controlModuleList
+  const tickets = []
+  const filteredControlModules = controlModules.filter((cm) => cm.area === area)
+  filteredControlModules.map((cm) => {
+    cm.tickets[0] && tickets.push(cm.tickets[0])
+  })
 
-  const areaTickets = tickets.filter((ticket) => ticket.area === area)
+  const dispatch = useDispatch()
 
-  // const productId = match.params.id
+  console.log(tickets)
 
-  // const [name, setName] = useState('')
-  // const [price, setPrice] = useState(0)
-  // const [image, setImage] = useState('')
-  // const [brand, setBrand] = useState('')
-  // const [category, setCategory] = useState('')
-  // const [countInStock, setCountInStock] = useState(0)
-  // const [description, setDescription] = useState('')
-  // const [uploading, setUploading] = useState(false)
-
-  // const dispatch = useDispatch()
-
-  // const productDetails = useSelector((state) => state.productDetails)
-  // const { loading, error, product } = productDetails
-
-  // const productUpdate = useSelector((state) => state.productUpdate)
-  // const {
-  //   loading: loadingUpdate,
-  //   error: errorUpdate,
-  //   success: successUpdate,
-  // } = productUpdate
-
-  // useEffect(() => {
-  //   if (successUpdate) {
-  //     dispatch({ type: PRODUCT_UPDATE_RESET })
-  //     history.push('/admin/productlist')
-  //   } else {
-  //     if (!product.name || product._id !== productId) {
-  //       dispatch(listProductDetails(productId))
-  //     } else {
-  //       setName(product.name)
-  //       setPrice(product.price)
-  //       setImage(product.image)
-  //       setBrand(product.brand)
-  //       setCategory(product.category)
-  //       setCountInStock(product.countInStock)
-  //       setDescription(product.description)
-  //     }
-  //   }
-  // }, [dispatch, history, productId, product, successUpdate])
-
-  // const uploadFileHandler = async (e) => {
-  //   const file = e.target.files[0]
-  //   const formData = new FormData()
-  //   formData.append('image', file)
-  //   setUploading(true)
-  //   try {
-  //     const config = {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     }
-  //     const { data } = await axios.post('/api/upload', formData, config)
-  //     setImage(data)
-  //     setUploading(false)
-  //   } catch (error) {
-  //     console.error(error)
-  //     setUploading(false)
-  //   }
-  // }
-
-  const submitHandler = () => {}
-  // const submitHandler = (e) => {
-  //   e.preventDefault()
-  //   dispatch(
-  //     updateProduct({
-  //       _id: productId,
-  //       name,
-  //       price,
-  //       image,
-  //       brand,
-  //       category,
-  //       description,
-  //       countInStock,
-  //     })
-  //   )
-  // }
-  console.log(match.params.area)
+  useEffect(() => {
+    dispatch(getControlModules())
+  }, [dispatch])
 
   return (
     <Fragment>
       <h1>{area}</h1>
       <p>View active tickets in the {area} area</p>
       <hr />
-      {areaTickets.map((ticket) => (
-        <Card>
-          <Card.Header>Ticket - {ticket._id}</Card.Header>
-          <Card.Body>
-            <Card.Title>{ticket.controlModule}</Card.Title>
-            <Card.Text>{ticket.comment}</Card.Text>
-            <Button variant='primary'>Go To Device</Button>
-          </Card.Body>
-        </Card>
-      ))}
+      {tickets &&
+        tickets.map((ticket) => (
+          <Card>
+            <Card.Header className='d-flex justify-content-between'>
+              Ticket - {ticket._id}
+              {ticket.resolved ? (
+                <Badge variant='success'>Resolved</Badge>
+              ) : ticket.priority === 'High' ? (
+                <Badge variant='danger' pill className='align-text-center'>HIGH</Badge>
+              ) : (
+                ticket.priority === 'Medium' && (
+                  <Badge variant='warning'>Medium</Badge>
+                )
+              )}
+            </Card.Header>
+            <Card.Body>
+              <Card.Title>{ticket.name}</Card.Title>
+              <Card.Text>{ticket.text}</Card.Text>
+              <Button variant='primary'>Go To Device</Button>
+            </Card.Body>
+          </Card>
+        ))}
 
       <Link to='/' className='btn btn-light my-3'>
         Go Back
@@ -112,4 +59,4 @@ const ProductEditScreen = ({ match, history }) => {
   )
 }
 
-export default ProductEditScreen
+export default TicketScreen
