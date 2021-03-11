@@ -38,7 +38,7 @@ var svg = d3
   .append('g')
   .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
 
-d3.csv('./data/donut1.csv', type, function (error, data) {
+d3.csvParse('age,population<5,27046595-13,449989014-17,215998118-24,385378825-44,1410654345-64,8819342≥65,612463', type, function (error, data) {
   if (error) throw error
 
   console.log(data)
