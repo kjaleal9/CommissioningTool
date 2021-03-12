@@ -13,30 +13,28 @@ import { Link } from 'react-router-dom'
 import { FaHeart, FaGem } from 'react-icons/fa'
 import { GoHome } from 'react-icons/go'
 import { GiTicket } from 'react-icons/gi'
-import { tickets } from '../files/tickets'
 import { MdSettings } from 'react-icons/md'
 
 const SideBar = ({ history }) => {
-  const areas = [...new Set(tickets.map((ticket) => ticket.area))].sort()
+//   const areas = [...new Set(tickets.map((ticket) => ticket.area))].sort()
 
-  const areaArray = []
-  tickets.forEach((ticket) => areaArray.push(ticket.area))
+//   const areaArray = []
+//   tickets.forEach((ticket) => areaArray.push(ticket.area))
 
-  function getOccurrence(array, value) {
-    var count = 0
-    array.forEach((v) => v === value && count++)
-    return count
-  }
-  const ticketCountByArea = []
+//   function getOccurrence(array, value) {
+//     var count = 0
+//     array.forEach((v) => v === value && count++)
+//     return count
+//   }
+//   const ticketCountByArea = []
 
-  areas.forEach((area) => {
-    ticketCountByArea.push({
-      area,
-      count: getOccurrence(areaArray, area),
-    })
-  })
+//   areas.forEach((area) => {
+//     ticketCountByArea.push({
+//       area,
+//       count: getOccurrence(areaArray, area),
+//     })
+//   })
 
-  console.log(areas)
   return (
     <ProSidebar className='md'>
       <SidebarHeader
@@ -91,23 +89,23 @@ const SideBar = ({ history }) => {
         <hr />
         <Menu iconShape='circle' popperArrow={true}>
           <SubMenu title='Areas' icon={<FaHeart />}>
-            {areas.map((area) => (
+            {/* {areas.map((area) => (
               <MenuItem icon={null}>{area}</MenuItem>
-            ))}
+            ))} */}
           </SubMenu>
         </Menu>
         <Menu iconShape='round'>
           <SubMenu
             title='Tickets'
             icon={<GiTicket />}
-            suffix={
-              <Badge pill variant='danger'>
-                {tickets.length}
-              </Badge>
-            }
+            // suffix={
+            //   <Badge pill variant='danger'>
+            //     {tickets.length}
+            //   </Badge>
+            // }
           >
             <Link to='/tickets' />
-            {ticketCountByArea.map((area) => (
+            {/* {ticketCountByArea.map((area) => (
               <MenuItem
                 suffix={
                   <Fragment>
@@ -120,7 +118,7 @@ const SideBar = ({ history }) => {
                 <Link to={`/tickets/${area.area}`} />
                 {area.area}
               </MenuItem>
-            ))}
+            ))} */}
           </SubMenu>
         </Menu>
         {/**

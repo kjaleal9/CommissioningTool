@@ -59,17 +59,11 @@ body{
     margin-bottom: 10px;
 }
 
-.dashboard{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
 
 .dashinfo{
-    border: 3px solid $dark;
-    border-radius: 2%;
-    max-width: 315px;
-    background-color: #fff;
+    
+    width: 320px;
+    background-color: $light;
 }
 
 .dashinfo__numbers{
@@ -84,22 +78,16 @@ body{
 }
 
 .dashinfo__low-priority{
-    padding: 0 10px 0 10px;
-    border-right: 1px solid $blue;
     color: $info;
+    text-align: center;
 }
 
 .dashinfo__med-priority{
-    padding: 0 10px 0 10px;
     color: $warning;
+    text-align: center;
 }
 
 .dashinfo__high-priority{
-    padding: 0 10px 0 10px;
-    border-left: 1px solid $blue;
     color: $danger;
-}
-
-.progress{
-    background-color: #e9ecef;
+    text-align: center;
 }

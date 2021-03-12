@@ -15,7 +15,7 @@ const getControlModules = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc    Fetch all products
+// @desc    Fetch all products by page
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
@@ -64,7 +64,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
         res.json({ message: 'Product removed' });
     } else {
         res.status(404);
-        throw new Error('Product not found');
+        throw new Error('Control Module not found');
     }
 });
 
@@ -82,32 +82,29 @@ const createControlModule = asyncHandler(async (req, res) => {
     res.status(201).json(createdControlModule);
 });
 
-// @desc    Update a product
-// @route   PUT /api/products/:id
+// @desc    Update a controlModule
+// @route   PUT /api/controlModules/:id
 // @access  Private/Admin
-const updateProduct = asyncHandler(async (req, res) => {
+const updateControlModule = asyncHandler(async (req, res) => {
     const {
         name,
-        price,
+        area,
         deviceType
     } = req.body;
 
-    const product = await Product.findById(req.params.id);
+    const controlModule = await ControlModule.findById(req.params.id);
 
-    if (product) {
-        product.name = name;
-        product.price = price;
-        product.description = description;
-        product.image = image;
-        product.brand = brand;
-        product.category = category;
-        product.countInStock = countInStock;
+    if (controlModule) {
+        controlModule.name = name || controlModule.name;
+        controlModule.area = area || controlModule.area;
+        controlModule.deviceType = deviceType || controlModule.deviceType;
 
-        const updatedProduct = await product.save();
-        res.json(updatedProduct);
+        const updatedControlModule = await controlModule.save();
+
+        res.json(updatedControlModule);
     } else {
         res.status(404);
-        throw new Error('Product not found');
+        throw new Error('Control Module not found');
     }
 });
 
@@ -166,7 +163,7 @@ export {
     getControlModuleById,
     deleteProduct,
     createControlModule,
-    updateProduct,
+    updateControlModule,
     createProductReview,
     getTopProducts,
 };
