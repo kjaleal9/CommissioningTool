@@ -50,7 +50,7 @@ $breakpoint-xl: 1200px !default;
 
 @import '~react-pro-sidebar/dist/scss/styles.scss';
 body{
-    background-color: #ecf0f1;
+    background-color: #fff;
    
 }
 
@@ -66,10 +66,10 @@ body{
 }
 
 .dashinfo{
-    border: 1px solid $dark;
+    border: 3px solid $dark;
     border-radius: 2%;
     max-width: 315px;
-    background-color: $light;
+    background-color: #fff;
 }
 
 .dashinfo__numbers{
@@ -98,4 +98,8 @@ body{
     padding: 0 10px 0 10px;
     border-left: 1px solid $blue;
     color: $danger;
+}
+
+.progress{
+    background-color: #e9ecef;
 }

@@ -131,7 +131,7 @@ const SideBar = ({ history }) => {
         {/**
          *  You can add a footer for the sidebar ex: copyright
          */}
-        <div className='text-center py-3'>Copyright &copy; TetraPak</div>
+        <div className='text-center py-3'>Copyright &copy; Company</div>
       </SidebarFooter>
     </ProSidebar>
   )

@@ -14,7 +14,7 @@ const DashInfo = ({ area }) => {
                 <h4>
                     {itemsComplete} items of {items}
                 </h4>
-                <ProgressBar striped now={(itemsComplete / items) * 100} />
+                <ProgressBar striped animated now={(itemsComplete / items) * 100} />
             </div>
             <hr />
             <div className='dashinfo__tickets'>

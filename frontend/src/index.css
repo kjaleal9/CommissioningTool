@@ -17,8 +17,19 @@ code {
     display: flex;
     position: relative;
 }
+#root, .app {
+    height: 100%;
+}
+.app main {
+    padding: 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
 
-.btn-toggle {
+   
+.app .btn-toggle {
     cursor: pointer;
     width: 35px;
     height: 35px;
@@ -41,12 +52,8 @@ main {
     overflow-y: auto;
 }
 
-#root, .app{
-    height: 100%;
-}
-
 @media (max-width: 768px){
- .app .btn-toggle {
-    display: flex;
-}   
-}
+    .app .btn-toggle {
+       display: flex;
+   }   
+   }

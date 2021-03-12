@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import colors from 'colors';
 import users from './data/users.js';
 import controlModules from './data/controlModules.js';
+import areas from './data/areas.js';
+import Area from './models/areaModel.js';
 import User from './models/userModel.js';
 import ControlModule from './models/ControlModuleModel.js';
 import connectDB from './config/db.js';
@@ -15,6 +17,7 @@ const importData = async () => {
     try {
         await ControlModule.deleteMany();
         await User.deleteMany();
+        await Area.deleteMany() 
 
         const createdUsers = await User.insertMany(users);
 
@@ -25,6 +28,7 @@ const importData = async () => {
         });
 
         await ControlModule.insertMany(sampleControlModules);
+        await Area.insertMany(areas);
 
         console.log('Data Imported!'.green.inverse);
         process.exit();

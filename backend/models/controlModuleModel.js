@@ -1,35 +1,5 @@
 import mongoose from 'mongoose';
 
-const commentSchema = mongoose.Schema(
-    {
-        comment: { type: String, required: true },
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'User',
-        },
-    },
-    {
-        timestamps: true,
-    }
-);
-
-const ticketSchema = mongoose.Schema(
-    {
-        name: { type: String, required: true },
-        priority: { type: String, required: true },
-        issueType: { type: String, required: true },
-        text: { type: String, required: true },
-        comments: [commentSchema],
-
-        isResolved: { type: Boolean, required: true, default: false },
-        resolvedAt: { type: Date },
-    },
-    {
-        timestamps: true,
-    }
-);
-
 const controlModuleSchema = mongoose.Schema(
     {
         name: {
@@ -62,10 +32,8 @@ const controlModuleSchema = mongoose.Schema(
                 default: false,
             },
         },
-        comment: {
-            type: String,
-        },
-        tickets: [ticketSchema],
+        comment: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }],
+        tickets: [{ type: mongoose.Schema.ObjectId, ref: 'Ticket' }],
     },
     {
         timestamps: true,

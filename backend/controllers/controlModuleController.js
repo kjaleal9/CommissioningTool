@@ -6,7 +6,13 @@ import ControlModule from '../models/controlModuleModel.js';
 // @access  Public
 const getControlModules = asyncHandler(async (req, res) => {
     const controlModules = await ControlModule.find();
-    res.json({ controlModules });
+    console.log(req.params.id)
+    if (controlModules) {
+        console.log(controlModules);
+        res.json({ controlModules });
+    } else {
+        res.status(500).send('Server Error');
+    }
 });
 
 // @desc    Fetch all products
@@ -33,22 +39,22 @@ const getProducts = asyncHandler(async (req, res) => {
     res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
-// @desc    Fetch single product
-// @route   GET /api/products/:id
+// @desc    Fetch single controlModule
+// @route   GET /api/controlModules/:id
 // @access  Public
-const getProductById = asyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
-
-    if (product) {
-        res.json(product);
+const getControlModuleById = asyncHandler(async (req, res) => {
+    const controlModule = await ControlModule.findById(req.params.id);
+  
+    if (controlModule) {
+        res.json(controlModule);
     } else {
         res.status(404);
         throw new Error('Product not found');
     }
 });
 
-// @desc    Delete a product
-// @route   DELETE /api/products/:id
+// @desc    Delete a controlModule
+// @route   DELETE /api/controlModules/:id
 // @access  Private/Admin
 const deleteProduct = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
@@ -65,21 +71,15 @@ const deleteProduct = asyncHandler(async (req, res) => {
 // @desc    Create a product
 // @route   POST /api/products
 // @access  Private/Admin
-const createProduct = asyncHandler(async (req, res) => {
-    const product = new Product({
+const createControlModule = asyncHandler(async (req, res) => {
+    const controlModule = new ControlModule({
         name: 'Sample name',
-        price: 0,
-        user: req.user._id,
-        image: '/images/sample.jpg',
-        brand: 'Sample brand',
-        category: 'Sample category',
-        countInStock: 0,
-        numReviews: 0,
-        description: 'Sample description',
+        area: 'Not Defined',
+        deviceType: 'Digital Input'
     });
 
-    const createdProduct = await product.save();
-    res.status(201).json(createdProduct);
+    const createdControlModule = await controlModule.save();
+    res.status(201).json(createdControlModule);
 });
 
 // @desc    Update a product
@@ -89,11 +89,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     const {
         name,
         price,
-        description,
-        image,
-        brand,
-        category,
-        countInStock,
+        deviceType
     } = req.body;
 
     const product = await Product.findById(req.params.id);
@@ -167,9 +163,9 @@ const getTopProducts = asyncHandler(async (req, res) => {
 
 export {
     getControlModules,
-    getProductById,
+    getControlModuleById,
     deleteProduct,
-    createProduct,
+    createControlModule,
     updateProduct,
     createProductReview,
     getTopProducts,

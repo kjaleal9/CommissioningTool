@@ -31,6 +31,8 @@ const ControlModuleScreen = () => {
   }, [dispatch])
   const deleteHandler = () => {}
 
+  
+
   return (
     <Fragment>
       <h1>Control Modules</h1>
