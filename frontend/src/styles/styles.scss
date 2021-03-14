@@ -61,9 +61,9 @@ body{
 
 
 .dashinfo{
-    
-    width: 320px;
+    width: 300px;
     background-color: $light;
+    margin: 5px;
 }
 
 .dashinfo__numbers{
@@ -80,6 +80,9 @@ body{
 .dashinfo__low-priority{
     color: $info;
     text-align: center;
+    &:hover{
+        cursor:pointer;
+    }
 }
 
 .dashinfo__med-priority{

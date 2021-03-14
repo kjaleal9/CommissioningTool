@@ -107,7 +107,7 @@ const HomeScreen = () => {
 
             {loading && <div>loading</div>}
             <Container className='dashboard' disableGutters fluid>
-                <Box display='flex' flexWrap='wrap' justifyContent="flex-start">
+                <Box display='flex' flexWrap='wrap' justifyContent="center">
                     {areas.map(area => (
                         <DashInfo area={area} />
                     ))}

@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/styles": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.9",
@@ -14,7 +15,6 @@
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
-    "react-d3-library": "^1.0.5",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
     "react-pro-sidebar": "^0.5.0",
