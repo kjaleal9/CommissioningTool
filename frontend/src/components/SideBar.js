@@ -1,138 +1,98 @@
-import React, { Fragment } from 'react'
-import {
-  ProSidebar,
-  SidebarHeader,
-  SidebarFooter,
-  SidebarContent,
-  SubMenu,
-  MenuItem,
-  Menu,
-} from 'react-pro-sidebar'
-import { Badge } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { FaHeart, FaGem } from 'react-icons/fa'
-import { GoHome } from 'react-icons/go'
-import { GiTicket } from 'react-icons/gi'
-import { MdSettings } from 'react-icons/md'
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import AppBar from '@material-ui/core/AppBar'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Toolbar from '@material-ui/core/Toolbar'
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import InboxIcon from '@material-ui/icons/MoveToInbox'
+import MailIcon from '@material-ui/icons/Mail'
+import SearchBox from './SearchBox'
+import CustomAppBar from './CustomAppBar'
 
-const SideBar = ({ history }) => {
-//   const areas = [...new Set(tickets.map((ticket) => ticket.area))].sort()
+const drawerWidth = 240
 
-//   const areaArray = []
-//   tickets.forEach((ticket) => areaArray.push(ticket.area))
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerContainer: {
+    overflow: 'auto',
+  },
+}))
 
-//   function getOccurrence(array, value) {
-//     var count = 0
-//     array.forEach((v) => v === value && count++)
-//     return count
-//   }
-//   const ticketCountByArea = []
-
-//   areas.forEach((area) => {
-//     ticketCountByArea.push({
-//       area,
-//       count: getOccurrence(areaArray, area),
-//     })
-//   })
+export default function ClippedDrawer() {
+  const classes = useStyles()
 
   return (
-    <ProSidebar className='md'>
-      <SidebarHeader
-        style={{
-          padding: '24px',
-          fontSize: '14px',
-          fontWeight: 'bold',
-          textTransform: 'uppercase',
+    <div className={classes.root}>
+      <Drawer
+        className={classes.drawer}
+        variant='permanent'
+        classes={{
+          paper: classes.drawerPaper,
         }}
       >
-        Commissioning Tool
-        {/**
-         *  You can add a header for the sidebar ex: logo
-         */}
-      </SidebarHeader>
-      <SidebarContent>
-        <Menu iconShape='circle'>
-          <MenuItem
-            icon={<GoHome />}
-            suffix={
-              <Badge pill variant='info'>
-                NEW
-              </Badge>
-            }
-          >
-            <Link to='/' />
-            Dashboard
-          </MenuItem>
-
-          <MenuItem
-            icon={<FaGem />}
-            suffix={
-              <Badge pill variant='info'>
-                NEW
-              </Badge>
-            }
-          >
-            <Link to='/controlModules' />
-            Control Modules
-          </MenuItem>
-          <MenuItem
-            icon={<MdSettings />}
-            suffix={
-              <Badge pill variant='info'>
-                NEW
-              </Badge>
-            }
-          >
-            Settings
-          </MenuItem>
-        </Menu>
-        <hr />
-        <Menu iconShape='circle' popperArrow={true}>
-          <SubMenu title='Areas' icon={<FaHeart />}>
-            {/* {areas.map((area) => (
-              <MenuItem icon={null}>{area}</MenuItem>
-            ))} */}
-          </SubMenu>
-        </Menu>
-        <Menu iconShape='round'>
-          <SubMenu
-            title='Tickets'
-            icon={<GiTicket />}
-            // suffix={
-            //   <Badge pill variant='danger'>
-            //     {tickets.length}
-            //   </Badge>
-            // }
-          >
-            <Link to='/tickets' />
-            {/* {ticketCountByArea.map((area) => (
-              <MenuItem
-                suffix={
-                  <Fragment>
-                    <Badge pill variant='danger'>
-                      {area.count}
-                    </Badge>
-                  </Fragment>
-                }
-              >
-                <Link to={`/tickets/${area.area}`} />
-                {area.area}
-              </MenuItem>
-            ))} */}
-          </SubMenu>
-        </Menu>
-        {/**
-         *  You can add the content of the sidebar ex: menu, profile details, ...
-         */}
-      </SidebarContent>
-      <SidebarFooter>
-        {/**
-         *  You can add a footer for the sidebar ex: copyright
-         */}
-        <div className='text-center py-3'>Copyright &copy; Company</div>
-      </SidebarFooter>
-    </ProSidebar>
+        <Toolbar />
+        <div className={classes.drawerContainer}>
+          <List>
+            {[
+              'Inbox',
+              'Starred',
+              'Send email',
+              'Drafts',
+              'Starred',
+              'Send email',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+              'Drafts',
+            ].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      </Drawer>
+    </div>
   )
 }
-
-export default SideBar

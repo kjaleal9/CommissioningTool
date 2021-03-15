@@ -17,6 +17,7 @@ import {
 } from '@material-ui/core';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MailIcon from '@material-ui/icons/Mail';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -57,7 +58,7 @@ const DashInfo = ({ area }) => {
                         onChange={handleChange('panel1')}
                     >
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
+                            expandIcon={<MailIcon />}
                             aria-controls='panel1bh-content'
                             id='panel1bh-header'
                         >

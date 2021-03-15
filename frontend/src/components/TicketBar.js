@@ -1,4 +1,3 @@
-
 import React, { Fragment, useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
@@ -6,8 +5,31 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { getControlModules } from '../actions/controlModuleActions'
 import DashInfo from '../components/DashInfo'
+import {
+  Divider,
+  Drawer,
+  makeStyles,
+  Toolbar,
+  Typography,
+} from '@material-ui/core'
 
-const HomeScreen = () => {
+const drawerWidth = 320
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+}))
+
+const TicketBar = () => {
+  const classes = useStyles()
   const areas = [
     {
       name: 'Batching',
@@ -91,31 +113,36 @@ const HomeScreen = () => {
     },
   ]
 
-  const controlModuleList = useSelector((state) => state.controlModuleList)
-  const { loading, controlModules, error } = controlModuleList
+  //   const controlModuleList = useSelector((state) => state.controlModuleList)
+  //   const { loading, controlModules, error } = controlModuleList
 
-  const dispatch = useDispatch()
+  //   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getControlModules())
-  }, [dispatch])
+  //   useEffect(() => {
+  //     dispatch(getControlModules())
+  //   }, [dispatch])
 
   return (
-    <Fragment fixed>
-      <Container className='header' fluid>
-        <h2>Dashboard</h2>
-      </Container>
+    <div className={classes.root}>
+      <Drawer
+        className={classes.drawer}
+        variant='permanent'
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor='right'
+      >
+        <Toolbar />
+        <Container>
+          <h2>Tickets</h2>
+        </Container>
 
-      {loading && <div>loading</div>}
-      <Container className='dashboard' disableGutters fluid>
-        <Box display='flex' flexWrap='wrap' justifyContent='center'>
-          {areas.map((area) => (
-            <DashInfo area={area} />
-          ))}
-        </Box>
-      </Container>
-    </Fragment>
+        <Divider />
+        {areas.map((area) => (
+          <DashInfo area={area} />
+        ))}
+      </Drawer>
+    </div>
   )
 }
-
-export default HomeScreen
+export default TicketBar
