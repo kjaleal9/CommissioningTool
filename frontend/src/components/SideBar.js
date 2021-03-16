@@ -1,10 +1,12 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import PropTypes from 'prop-types'
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Toolbar from '@material-ui/core/Toolbar'
 import List from '@material-ui/core/List'
+
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
@@ -14,6 +16,9 @@ import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
 import SearchBox from './SearchBox'
 import CustomAppBar from './CustomAppBar'
+import { Link } from '@material-ui/core'
+import { Route, MemoryRouter } from 'react-router'
+import { Link as RouterLink } from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -31,7 +36,35 @@ const useStyles = makeStyles((theme) => ({
   drawerContainer: {
     overflow: 'auto',
   },
+  
 }))
+
+function ListItemLink(props) {
+  const { icon, primary, to } = props
+
+  const renderLink = React.useMemo(
+    () =>
+      React.forwardRef((itemProps, ref) => (
+        <RouterLink to={to} ref={ref} {...itemProps} />
+      )),
+    [to]
+  )
+
+  return (
+    <li>
+      <ListItem button component={renderLink}>
+        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+        <ListItemText primary={primary} />
+      </ListItem>
+    </li>
+  )
+}
+
+ListItemLink.propTypes = {
+  icon: PropTypes.element,
+  primary: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+}
 
 export default function ClippedDrawer() {
   const classes = useStyles()
@@ -48,37 +81,8 @@ export default function ClippedDrawer() {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {[
-              'Inbox',
-              'Starred',
-              'Send email',
-              'Drafts',
-              'Starred',
-              'Send email',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-              'Drafts',
-            ].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItemLink to='/' primary='Home' icon={<InboxIcon />} />
+            <ListItemLink to='/create' primary='Create' icon={<InboxIcon />} />
           </List>
           <Divider />
           <List>

@@ -1,4 +1,3 @@
-
 import React, { Fragment, useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
@@ -6,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { getControlModules } from '../actions/controlModuleActions'
 import DashInfo from '../components/DashInfo'
+import { Grid, Typography } from '@material-ui/core'
 
 const HomeScreen = () => {
   const areas = [
@@ -101,19 +101,12 @@ const HomeScreen = () => {
   }, [dispatch])
 
   return (
-    <Fragment fixed>
-      <Container className='header' fluid>
-        <h2>Dashboard</h2>
-      </Container>
-
-      {loading && <div>loading</div>}
-      <Container className='dashboard' disableGutters fluid>
-        <Box display='flex' flexWrap='wrap' justifyContent='center'>
-          {areas.map((area) => (
-            <DashInfo area={area} />
-          ))}
-        </Box>
-      </Container>
+    <Fragment>
+      <Grid container direction='column'>
+        <Grid item style={{ marginTop: '2em', marginLeft: '5em' }}>
+          <Typography variant='h1'>Dashboard</Typography>
+        </Grid>
+      </Grid>
     </Fragment>
   )
 }
