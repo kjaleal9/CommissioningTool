@@ -12,6 +12,7 @@ const ControlModuleCard = ({
 }) => {
   const [open, setOpen] = useState(false)
   console.log(Boolean(tickets.length))
+  
   return (
     <Card
       border={

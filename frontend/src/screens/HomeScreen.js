@@ -1,10 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import Container from '@material-ui/core/Container'
-import Box from '@material-ui/core/Box'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { getControlModules } from '../actions/controlModuleActions'
-import DashInfo from '../components/DashInfo'
 import { Grid, Typography } from '@material-ui/core'
 
 const HomeScreen = () => {

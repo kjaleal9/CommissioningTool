@@ -49,7 +49,7 @@ function App() {
               <Route path='/' component={HomeScreen} exact />
             </Container>
           </main>
-          <TicketBar />
+          {/* <TicketBar /> */}
         </ThemeProvider>
       </div>
     </Router>

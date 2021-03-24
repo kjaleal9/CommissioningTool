@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    background: "#e7eff6"
   },
   drawerContainer: {
     overflow: 'auto',
