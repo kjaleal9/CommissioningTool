@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getControlModules } from '../actions/controlModuleActions'
+import { getControlModules } from '../actions/taskActions'
 import DashInfo from '../components/DashInfo'
 import {
   Divider,

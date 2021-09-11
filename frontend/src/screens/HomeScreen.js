@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getControlModules } from '../actions/controlModuleActions'
+import { getControlModules } from '../actions/taskActions'
 import { Grid, Typography } from '@material-ui/core'
 
 const HomeScreen = () => {

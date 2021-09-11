@@ -2,10 +2,10 @@ import mongoose from 'mongoose';
 
 const areaSchema = mongoose.Schema({
     name: { type: String, required: true },
-    controlModules: [
+    tasks: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'ControlModule',
+            ref: 'Task',
         },
     ],
 });

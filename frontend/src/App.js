@@ -8,7 +8,7 @@ import './styles/styles.scss'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import TicketScreen from './screens/TicketScreen'
-import ControlModuleScreen from './screens/ControlModuleScreen'
+import TaskScreen from './screens/TaskScreen'
 import CreateNewControlModule from './screens/CreateNewControlModule'
 import CustomAppBar from './components/CustomAppBar'
 import TicketBar from './components/TicketBar'
@@ -43,13 +43,13 @@ function App() {
             <Toolbar />
             <Container>
               <Route path='/create' component={CreateNewControlModule} />
-              <Route path='/controlModules' component={ControlModuleScreen} />
+              <Route path='/tasks' component={TaskScreen} />
               <Route path='/tickets/:area' component={TicketScreen} />
               <Route path='/login' component={LoginScreen} />
               <Route path='/' component={HomeScreen} exact />
             </Container>
           </main>
-          {/* <TicketBar /> */}
+           <TicketBar /> 
         </ThemeProvider>
       </div>
     </Router>

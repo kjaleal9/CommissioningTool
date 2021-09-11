@@ -21,7 +21,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { format } from 'date-fns';
 import CustomTable from '../components/Table/CustomTable';
-import { getControlModules } from '../actions/controlModuleActions';
+import { getControlModules } from '../actions/taskActions';
 
 const useStyles = makeStyles(theme => ({
   service: {

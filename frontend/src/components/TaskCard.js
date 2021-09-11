@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import { Badge, Button, Card, Collapse, Nav } from 'react-bootstrap'
 
-const ControlModuleCard = ({
+const TaskCard = ({
   name,
   area,
   deviceType,
@@ -83,4 +83,4 @@ const ControlModuleCard = ({
   )
 }
 
-export default ControlModuleCard
+export default TaskCard

@@ -1,7 +1,7 @@
 {
-  "name": "proshop",
+  "name": "commissioning-tool",
   "version": "1.0.0",
-  "description": "MERN shopping cart app",
+  "description": "MERN Commissioning Tool",
   "main": "server.js",
   "type": "module",
   "scripts": {

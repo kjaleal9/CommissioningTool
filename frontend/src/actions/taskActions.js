@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-export const getControlModules = () => async dispatch => {
+export const get = () => async dispatch => {
     try {
-        dispatch({ type: 'CONTROL_MODULE_LIST_REQUEST' });
+        dispatch({ type: 'TASK_LIST_REQUEST' });
 
-        const { data } = await axios.get(`/api/controlModules`);
+        const { data } = await axios.get(`/api/tasks`);
         console.log(data)
         dispatch({
-            type: 'CONTROL_MODULE_LIST_SUCCESS',
+            type: 'TASK_LIST_SUCCESS',
             payload: data,
         });
     } catch (error) {
         dispatch({
-            type: 'CONTROL_MODULE_LIST_FAIL',
+            type: 'TASK_LIST_FAIL',
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

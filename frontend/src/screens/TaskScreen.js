@@ -6,20 +6,20 @@ import {
   Collapse,
   Pagination,
   Row,
-  Table
+  Table,
 } from 'react-bootstrap'
-import {LinkContainer} from 'react-router-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import ControlModuleCard from '../components/ControlModuleCard'
+import TaskCard from '../components/TaskCard'
 
-import { getControlModules } from '../actions/controlModuleActions'
+import { getTasks } from '../actions/taskActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import SearchBox from '../components/SearchBox'
 
-const ControlModuleScreen = () => {
-  const controlModuleList = useSelector((state) => state.controlModuleList)
-  const { loading, controlModules, error } = controlModuleList
+const TasksScreen = () => {
+  const controlModuleList = useSelector((state) => state.taskList)
+  const { loading, tasks, error } = taskList
 
   const [open, setOpen] = useState(false)
   const [listStyle, setListStyle] = useState('list')
@@ -27,11 +27,9 @@ const ControlModuleScreen = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getControlModules())
+    dispatch(getTasks())
   }, [dispatch])
   const deleteHandler = () => {}
-
-  
 
   return (
     <Fragment>
@@ -64,17 +62,17 @@ const ControlModuleScreen = () => {
       ) : (
         listStyle === 'card' && (
           <Row className='m-auto'>
-            {controlModules.map((controlModule) => (
-              <ControlModuleCard
-                name={controlModule.name}
-                area={controlModule.area}
+            {tasks.map((task) => (
+              <TaskCard
+                name={task.name}
+                area={task.area}
                 comment={
                   'This is a sample comment with a lot of random words to form a larger sentence. This sentence is added so that the card comment can become larger, forming a paragraph. This last sentence is more nonesense. You are welcome.'
                 }
-                deviceType={controlModule.deviceType}
-                createdAt={controlModule.createdAt}
-                status={controlModule.status}
-                tickets={controlModule.tickets}
+                deviceType={task.deviceType}
+                createdAt={task.createdAt}
+                status={task.status}
+                tickets={task.tickets}
               />
             ))}
           </Row>
@@ -100,14 +98,14 @@ const ControlModuleScreen = () => {
                 </tr>
               </thead>
               <tbody>
-                {controlModules.map((controlModule) => (
-                  <tr key={controlModule._id}>
-                    <td>{controlModule._id}</td>
-                    <td>{controlModule.name}</td>
-                    <td>{controlModule.area}</td>
-                    <td>{controlModule.deviceType}</td>
+                {tasks.map((task) => (
+                  <tr key={task._id}>
+                    <td>{task._id}</td>
+                    <td>{task.name}</td>
+                    <td>{task.area}</td>
+                    <td>{task.deviceType}</td>
                     <td>
-                      {controlModule.comment && (
+                      {task.comment && (
                         <Fragment>
                           <Button
                             onClick={() => setOpen(!open)}
@@ -117,7 +115,7 @@ const ControlModuleScreen = () => {
                             click
                           </Button>
                           <Collapse in={open}>
-                            <Card.Text>{controlModule.comment}</Card.Text>
+                            <Card.Text>{task.comment}</Card.Text>
                           </Collapse>
                         </Fragment>
                       )}
@@ -125,7 +123,7 @@ const ControlModuleScreen = () => {
                     {
                       <td>
                         <LinkContainer
-                          to={`/admin/controlModules/${controlModules._id}/edit`}
+                          to={`/admin/tasks/${tasks._id}/edit`}
                         >
                           <Button variant='light' className='btn-sm'>
                             <i className='fas fa-edit'></i>
@@ -134,7 +132,7 @@ const ControlModuleScreen = () => {
                         <Button
                           variant='danger'
                           className='btn-sm'
-                          onClick={() => deleteHandler(controlModules._id)}
+                          onClick={() => deleteHandler(tasks._id)}
                         >
                           <i className='fas fa-trash'></i>
                         </Button>
@@ -166,4 +164,4 @@ const ControlModuleScreen = () => {
   )
 }
 
-export default ControlModuleScreen
+export default TasksScreen

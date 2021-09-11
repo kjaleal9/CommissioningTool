@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Form, Button, Card, Badge } from 'react-bootstrap'
 import { Fragment } from 'react'
 
-import { getControlModules } from '../actions/controlModuleActions'
+import { getControlModules } from '../actions/taskActions'
 
 const TicketScreen = ({ match, history }) => {
   const area = match.params.area
