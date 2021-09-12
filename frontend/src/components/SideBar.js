@@ -51,7 +51,7 @@ const MyBadge = () => {
 
 function ListItemLink(props) {
   const theme = useTheme()
-  console.log(theme.palette.error.main)
+
   const { icon, primary, to } = props
 
   const renderLink = React.useMemo(

@@ -24,7 +24,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import { format } from 'date-fns'
 import CustomTable from '../components/Table/CustomTable'
-import { getTasks } from '../actions/taskActions'
+import { getTasks, addTask } from '../actions/taskActions'
 import { getAreas } from '../actions/areaActions'
 
 const useStyles = makeStyles((theme) => ({
@@ -42,28 +42,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function createData(
-  name,
-  date,
-  service,
-  features,
-  complexity,
-  platforms,
-  users,
-  total
-) {
-  return {
-    name,
-    date,
-    service,
-    features,
-    complexity,
-    platforms,
-    users,
-    total,
-  }
-}
-
 export default function ProjectManagerScreen() {
   const classes = useStyles()
   const theme = useTheme()
@@ -73,8 +51,6 @@ export default function ProjectManagerScreen() {
 
   const { loading: loadingTasks, tasks, error: errorTasks } = taskList
   const { loading: loadingAreas, areas, error: errorAreas } = areaList
-
-  console.log(areas)
 
   const dispatch = useDispatch()
 
@@ -86,47 +62,26 @@ export default function ProjectManagerScreen() {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [name, setName] = useState('')
   const [date, setDate] = useState(new Date())
-  const [type, setType] = useState('')
+  const [taskType, setTaskType] = useState('')
+  const [deviceType, setDeviceType] = useState('')
   const [area, setArea] = useState('')
-  const [rows, setRows] = useState([
-    createData(
-      'Zackary Reese',
-      '11/2/19',
-      'Website',
-      'E-Commerce',
-      'N/A',
-      'N/A',
-      'N/A',
-      '$1500'
-    ),
-    createData(
-      'Bill Gates',
-      '10/17/19',
-      'Custom Software',
-      'GPS, Push Notifications, Users/Authentication, FileTransfer',
-      'Medium',
-      'Web Applicaiton',
-      '0-10',
-      '$1600'
-    ),
-    createData(
-      'Steve Jobs',
-      '2/13/19',
-      'Custom Software',
-      'Photo/Video, File Transfer, Users/Authentication',
-      'Low',
-      'Web Application',
-      '10-100',
-      '$1250'
-    ),
-  ])
 
-  const addProject = () => {
-    setRows([...rows, createData(name, format(date, 'MM/dd/yy'), type, area)])
+  const controlModuleTypes = [
+    'Motor',
+    'Digital Input',
+    'Digital Output',
+    'Analog Input',
+    'Analog Output',
+  ]
+
+  const addNewTask = () => {
+    dispatch(addTask(name, area, taskType, deviceType))
     setDialogOpen(false)
     setName('')
     setDate(new Date())
-    setType('')
+    setTaskType('')
+    setDeviceType('')
+    setArea('')
   }
 
   const handleAdd = () => {
@@ -210,15 +165,15 @@ export default function ProjectManagerScreen() {
                   alignItems='center'
                 >
                   <Grid item>
-                    <Typography variant='h4'>Type</Typography>
+                    <Typography variant='h4'>Task Type</Typography>
                   </Grid>
                   <Grid item>
                     <Grid item>
                       <RadioGroup
-                        aria-label='type'
-                        name='type'
-                        value={type}
-                        onChange={(event) => setType(event.target.value)}
+                        aria-label='TaskType'
+                        name='taskType'
+                        value={taskType}
+                        onChange={(event) => setTaskType(event.target.value)}
                       >
                         <FormControlLabel
                           classes={{
@@ -250,6 +205,26 @@ export default function ProjectManagerScreen() {
                 </Grid>
                 <Grid item style={{ marginTop: '5em' }}>
                   <FormControl className={classes.formControl}>
+                    <InputLabel id='platforms-label'>Device Type</InputLabel>
+                    <Select
+                      labelId='deviceTypes'
+                      style={{ width: '20em' }}
+                      id='deviceTypes'
+                      fullWidth
+                      displayEmpty
+                      value={deviceType}
+                      onChange={(event) => setDeviceType(event.target.value)}
+                    >
+                      {controlModuleTypes.map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {option}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item style={{ marginTop: '5em' }}>
+                  <FormControl className={classes.formControl}>
                     <InputLabel id='platforms-label'>Area</InputLabel>
                     <Select
                       labelId='areas'
@@ -271,7 +246,11 @@ export default function ProjectManagerScreen() {
               </Grid>
             </Grid>
 
-            <Grid container justify='center' style={{ marginTop: '3em', marginBottom:'2em' }}>
+            <Grid
+              container
+              justify='center'
+              style={{ marginTop: '3em', marginBottom: '2em' }}
+            >
               <Grid item>
                 <Button
                   color='primary'
@@ -285,13 +264,13 @@ export default function ProjectManagerScreen() {
                 <Button
                   variant='contained'
                   className={classes.button}
-                  onClick={addProject}
+                  onClick={addNewTask}
                   disabled={
-                    type === 'Control Module'
+                    taskType === 'Control Module'
                       ? name.length === 0 || area.length === 0
                       : name.length === 0 ||
                         areas.length === 0 ||
-                        type.length === 0
+                        taskType.length === 0
                   }
                 >
                   Add Item +

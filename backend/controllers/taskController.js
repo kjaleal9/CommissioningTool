@@ -7,9 +7,7 @@ import mongoose from 'mongoose'
 // @access  Public
 const getTasks = asyncHandler(async (req, res) => {
   const tasks = await Task.find()
-  console.log(req.params.id)
   if (tasks) {
-    console.log(tasks)
     res.json({ tasks })
   } else {
     res.status(500).send('Server Error')
@@ -22,7 +20,6 @@ const getTasks = asyncHandler(async (req, res) => {
 const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
-
   const keyword = req.query.keyword
     ? {
         name: {
@@ -45,7 +42,6 @@ const getProducts = asyncHandler(async (req, res) => {
 // @access  Public
 const getTaskById = asyncHandler(async (req, res) => {
   const task = await Task.findById(req.params.id)
-  console.log(req.params.id)
   if (task) {
     res.json(task)
   } else {
@@ -58,7 +54,7 @@ const getTaskById = asyncHandler(async (req, res) => {
 // @route   DELETE /api/tasks/:id
 // @access  Private/Admin
 const deleteTask = asyncHandler(async (req, res) => {
-  if (req.body) {
+  if (req.body.idArray) {
     const result = await Task.deleteMany({
       _id: {
         $in: req.body.idArray,
@@ -70,7 +66,7 @@ const deleteTask = asyncHandler(async (req, res) => {
 
     if (task) {
       await task.remove()
-      res.json({ message: 'Task removed', task: task })
+      res.json({ message: 'Task removed', deletedTask: task })
     } else {
       res.status(404)
       throw new Error(`{task.id} not found`)
@@ -96,7 +92,7 @@ const createTask = asyncHandler(async (req, res) => {
     })
 
     const createdTask = await task.save()
-    res.status(201).json(createdTask)
+    res.status(201).json({ createdTask })
   }
 })
 
@@ -115,7 +111,7 @@ const updateTask = asyncHandler(async (req, res) => {
     task.deviceType = deviceType || task.deviceType
 
     const updatedTask = await task.save()
-    
+
     res.json(updatedTask)
   } else {
     res.status(404)

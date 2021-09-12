@@ -50,7 +50,7 @@ const CustomToolbar = props => {
 
       {numSelected > 0 ? (
         <Tooltip title='Delete'>
-          <IconButton aria-label='delete'>
+          <IconButton aria-label='delete' onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
