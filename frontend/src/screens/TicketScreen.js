@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom'
 import { Form, Button, Card, Badge } from 'react-bootstrap'
 import { Fragment } from 'react'
 
-import { getControlModules } from '../actions/taskActions'
+import { getTasks } from '../actions/taskActions'
 
 const TicketScreen = ({ match, history }) => {
   const area = match.params.area
-  const controlModuleList = useSelector((state) => state.controlModuleList)
-  const { loading, controlModules, error } = controlModuleList
+  const taskList = useSelector((state) => state.taskList)
+  const { loading, tasks, error } = taskList
   const tickets = []
-  const filteredControlModules = controlModules.filter((cm) => cm.area === area)
-  filteredControlModules.map((cm) => {
+  const filteredTasks = tasks.filter((cm) => cm.area === area)
+  filteredTasks.map((cm) => {
     cm.tickets[0] && tickets.push(cm.tickets[0])
   })
 
@@ -21,7 +21,7 @@ const TicketScreen = ({ match, history }) => {
   console.log(tickets)
 
   useEffect(() => {
-    dispatch(getControlModules())
+    dispatch(getTasks())
   }, [dispatch])
 
   return (

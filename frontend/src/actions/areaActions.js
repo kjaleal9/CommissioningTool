@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-export const getTasks = () => async dispatch => {
+export const getAreas = () => async dispatch => {
     try {
-        dispatch({ type: 'TASK_LIST_REQUEST' });
+        dispatch({ type: 'AREA_LIST_REQUEST' });
 
-        const { data } = await axios.get(`/api/tasks`);
+        const { data } = await axios.get(`/api/areas`);
         console.log(data)
         dispatch({
-            type: 'TASK_LIST_SUCCESS',
+            type: 'AREA_LIST_SUCCESS',
             payload: data,
         });
     } catch (error) {
         dispatch({
-            type: 'TASK_LIST_FAIL',
+            type: 'AREA_LIST_FAIL',
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

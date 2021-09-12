@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CustomTable = ({ rows }) => {
+const CustomTable = ({ rows,handleAdd }) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
@@ -74,6 +74,8 @@ const CustomTable = ({ rows }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [editMode, setEditMode] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false)
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -136,6 +138,7 @@ const CustomTable = ({ rows }) => {
           editMode={editMode}
           handleEditMode={handleEditMode}
           handleCancelEditMode={handleCancelEditMode}
+          handleAdd={handleAdd}
         />
         <TableContainer>
           <Table className={classes.table} aria-labelledby='tableTitle' aria-label='enhanced table'>

@@ -1,10 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { controlModuleListReducer } from './reducers/controlModuleReducers';
+import { taskListReducer } from './reducers/taskListReducers';
+import { areaListReducer } from './reducers/areaListReducers';
 
 const reducer = combineReducers({
-    controlModuleList: controlModuleListReducer,
+    taskList: taskListReducer,
+    areaList: areaListReducer,
 });
 
 const middleware = [thunk];

@@ -6,6 +6,7 @@ import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 
+import areaRoutes from './routes/areaRoutes.js'
 import taskRoutes from './routes/taskRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
@@ -22,6 +23,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json())
 
+app.use('/api/areas', areaRoutes)
 app.use('/api/tasks', taskRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/upload', uploadRoutes)

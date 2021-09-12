@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getControlModules } from '../actions/taskActions'
-import { Grid, Typography } from '@material-ui/core'
+import { getTasks } from '../actions/taskActions'
+import { Grid, Typography, Paper } from '@material-ui/core'
 
 const HomeScreen = () => {
   const areas = [
@@ -88,20 +88,34 @@ const HomeScreen = () => {
     },
   ]
 
-  const controlModuleList = useSelector((state) => state.controlModuleList)
-  const { loading, controlModules, error } = controlModuleList
+  const taskList = useSelector((state) => state.taskList)
+  const { loading, tasks, error } = taskList
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getControlModules())
+    dispatch(getTasks())
   }, [dispatch])
 
   return (
     <Fragment>
       <Grid container direction='column'>
-        <Grid item style={{ marginTop: '2em', marginLeft: '5em' }}>
-          <Typography variant='h1'>Dashboard</Typography>
+        <Grid item component={Paper}>
+          <Grid
+            item
+            style={{ marginTop: '2em', marginLeft: '5em', marginBottom: '2em' }}
+          >
+            <Typography variant='h1'>Dashboard</Typography>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          component={Paper}
+          style={{ marginBottom: '15em', marginTop: '2em' }}
+        >
+          <Grid item style={{ marginTop: '2em', marginLeft: '5em' }}>
+            <h3>This is sample text for the dashboard</h3>
+          </Grid>
         </Grid>
       </Grid>
     </Fragment>

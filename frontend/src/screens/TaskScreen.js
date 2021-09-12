@@ -18,7 +18,7 @@ import Message from '../components/Message'
 import SearchBox from '../components/SearchBox'
 
 const TasksScreen = () => {
-  const controlModuleList = useSelector((state) => state.taskList)
+  const taskList = useSelector((state) => state.taskList)
   const { loading, tasks, error } = taskList
 
   const [open, setOpen] = useState(false)
@@ -33,8 +33,8 @@ const TasksScreen = () => {
 
   return (
     <Fragment>
-      <h1>Control Modules</h1>
-      <p>View all of your control modules</p>
+      <h1>Tasks</h1>
+      <p>View all of your tasks</p>
       {listStyle === 'card' && (
         <Button
           className='mt-auto mb-auto btn-sm'

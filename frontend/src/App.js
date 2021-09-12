@@ -9,7 +9,7 @@ import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import TicketScreen from './screens/TicketScreen'
 import TaskScreen from './screens/TaskScreen'
-import CreateNewControlModule from './screens/CreateNewControlModule'
+import ProjectManagerScreen from './screens/ProjectManagerScreen'
 import CustomAppBar from './components/CustomAppBar'
 import TicketBar from './components/TicketBar'
 import theme from './theme'
@@ -22,15 +22,15 @@ import {
   Toolbar,
 } from '@material-ui/core'
 
-const useStyles = makeStyles((theme) => ({
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-}))
+// const useStyles = makeStyles((theme) => ({
+//   content: {
+//     flexGrow: 1,
+//     padding: theme.spacing(3),
+//   },
+// }))
 
 function App() {
-  const classes = useStyles()
+  // const classes = useStyles()
 
   return (
     <Router>
@@ -39,17 +39,18 @@ function App() {
           <CssBaseline />
           <CustomAppBar />
           <SideBar />
-          <main className={classes.content}>
+          <main>
+            {/*className={classes.content}*/}
             <Toolbar />
             <Container>
-              <Route path='/create' component={CreateNewControlModule} />
+              <Route path='/create' component={ProjectManagerScreen} />
               <Route path='/tasks' component={TaskScreen} />
               <Route path='/tickets/:area' component={TicketScreen} />
               <Route path='/login' component={LoginScreen} />
               <Route path='/' component={HomeScreen} exact />
             </Container>
           </main>
-           <TicketBar /> 
+          <TicketBar />
         </ThemeProvider>
       </div>
     </Router>

@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Task from '../models/taskModel.js'
+import mongoose from 'mongoose'
 
 // @desc    Fetch all tasks
 // @route   GET /api/tasks
@@ -15,8 +16,8 @@ const getTasks = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc    Fetch all products by page
-// @route   GET /api/products
+// @desc    Fetch tasks by page
+// @route   GET /api/tasks
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 10
@@ -44,7 +45,7 @@ const getProducts = asyncHandler(async (req, res) => {
 // @access  Public
 const getTaskById = asyncHandler(async (req, res) => {
   const task = await Task.findById(req.params.id)
-    console.log(req.params.id)
+  console.log(req.params.id)
   if (task) {
     res.json(task)
   } else {
@@ -56,15 +57,24 @@ const getTaskById = asyncHandler(async (req, res) => {
 // @desc    Delete a task
 // @route   DELETE /api/tasks/:id
 // @access  Private/Admin
-const deleteProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id)
-
-  if (product) {
-    await product.remove()
-    res.json({ message: 'Product removed' })
+const deleteTask = asyncHandler(async (req, res) => {
+  if (req.body) {
+    const result = await Task.deleteMany({
+      _id: {
+        $in: req.body.idArray,
+      },
+    })
+    res.json({ message: 'Tasks removed', result })
   } else {
-    res.status(404)
-    throw new Error('Control Module not found')
+    const task = await Task.findById(req.params.id)
+
+    if (task) {
+      await task.remove()
+      res.json({ message: 'Task removed', task: task })
+    } else {
+      res.status(404)
+      throw new Error(`{task.id} not found`)
+    }
   }
 })
 
@@ -72,19 +82,26 @@ const deleteProduct = asyncHandler(async (req, res) => {
 // @route   POST /api/tasks
 // @access  Private/Admin
 const createTask = asyncHandler(async (req, res) => {
-  const task = new Task({
-    name: 'Sample name',
-    area: 'Not Defined',
-    taskType: 'Control Module',
-    deviceType: 'Digital Input',
-  })
+  const { name, area, taskType, deviceType } = req.body
 
-  const createdTask = await task.save()
-  res.status(201).json(createdTask)
+  if (!name || !area || !taskType || !deviceType) {
+    res.status(400)
+    throw new Error('Request not valid')
+  } else {
+    const task = new Task({
+      name,
+      area,
+      taskType,
+      deviceType,
+    })
+
+    const createdTask = await task.save()
+    res.status(201).json(createdTask)
+  }
 })
 
-// @desc    Update a controlModule
-// @route   PUT /api/controlModules/:id
+// @desc    Update a Task
+// @route   PUT /api/tasks/:id
 // @access  Private/Admin
 const updateTask = asyncHandler(async (req, res) => {
   const { name, area, taskType, deviceType } = req.body
@@ -94,10 +111,11 @@ const updateTask = asyncHandler(async (req, res) => {
   if (task) {
     task.name = name || task.name
     task.area = area || task.area
+    task.taskType = taskType || task.taskType
     task.deviceType = deviceType || task.deviceType
 
     const updatedTask = await task.save()
-
+    
     res.json(updatedTask)
   } else {
     res.status(404)
@@ -158,7 +176,7 @@ const getTopProducts = asyncHandler(async (req, res) => {
 export {
   getTasks,
   getTaskById,
-  deleteProduct,
+  deleteTask,
   createTask,
   updateTask,
   createProductReview,

@@ -58,8 +58,8 @@ const CustomToolbar = props => {
         <Fragment>
           {editMode ? (
             <Fragment>
-              <Tooltip title='Cancel edit'>
-                <IconButton aria-label='cancel edit' onClick={handleAdd}>
+              <Tooltip title='Add task'>
+                <IconButton aria-label='add task' onClick={handleAdd}>
                   <AddBoxIcon />
                 </IconButton>
               </Tooltip>
