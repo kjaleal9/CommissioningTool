@@ -66,6 +66,7 @@ const deleteTask = asyncHandler(async (req, res) => {
 
     if (task) {
       await task.remove()
+      console.log('removed',task)
       res.json({ message: 'Task removed', deletedTask: task })
     } else {
       res.status(404)

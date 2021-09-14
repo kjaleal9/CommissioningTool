@@ -9,6 +9,7 @@ export const taskListReducer = (state = { tasks: [] }, action) => {
       }
     case 'TASK_LIST_FAIL':
       return { loading: false, error: action.payload }
+
     case 'ADD_TASK_REQUEST':
       return { loading: true, tasks: [...state.tasks] }
     case 'ADD_TASK_SUCCESS':
@@ -18,13 +19,18 @@ export const taskListReducer = (state = { tasks: [] }, action) => {
       }
     case 'ADD_TASK_FAIL':
       return { loading: false, error: action.payload }
+
     case 'DELETE_TASK_REQUEST':
       return { loading: true, tasks: [...state.tasks] }
     case 'DELETE_TASK_SUCCESS':
+      const idArr = action.payload
       const currentState = [...state.tasks]
+      const newState = currentState.filter(
+        (object) => !idArr.includes(object._id)
+      )
       return {
         loading: false,
-        tasks: [currentState.filter((item, index) => index !== action.payload.deletedTask.id)],
+        tasks: newState,
       }
     case 'DELETE_TASK_FAIL':
       return { loading: false, error: action.payload }

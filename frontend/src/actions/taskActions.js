@@ -34,7 +34,6 @@ export const addTask =
       }
       const { data } = await axios.post(`/api/tasks`, body)
 
-      console.log(data)
       dispatch({
         type: 'ADD_TASK_SUCCESS',
         payload: data,
@@ -50,15 +49,37 @@ export const addTask =
     }
   }
 
-  export const deleteTask = (id) => async (dispatch) => {
+export const deleteTask = (id) => async (dispatch) => {
+  if (id.length < 2) {
     try {
       dispatch({ type: 'DELETE_TASK_REQUEST' })
 
       const { data } = await axios.delete(`/api/tasks/${id}`)
-      console.log(data)
+
       dispatch({
         type: 'DELETE_TASK_SUCCESS',
-        payload: data.id,
+        payload: id,
+      })
+    } catch (error) {
+      dispatch({
+        type: 'DELETE_TASK_FAIL',
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  } else {
+    try {
+      dispatch({ type: 'DELETE_TASK_REQUEST' })
+
+      const { data } = await axios.delete(`/api/tasks/${123}`, {
+        data: { idArray: id },
+      })
+
+      dispatch({
+        type: 'DELETE_TASK_SUCCESS',
+        payload: id,
       })
     } catch (error) {
       dispatch({
@@ -70,3 +91,4 @@ export const addTask =
       })
     }
   }
+}

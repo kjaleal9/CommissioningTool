@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   Table,
   TableCell,
@@ -9,40 +9,43 @@ import {
   Checkbox,
   makeStyles,
   TablePagination,
-} from '@material-ui/core';
+} from '@material-ui/core'
 
-import CustomTableHead from './CustomTableHead';
-import CustomToolbar from './CustomToolbar';
-import DoneIcon from '@material-ui/icons/Done';
-import ClearIcon from '@material-ui/icons/Clear';
+import { useDispatch } from 'react-redux'
+import { deleteTask } from '../../actions/taskActions'
+
+import CustomTableHead from './CustomTableHead'
+import CustomToolbar from './CustomToolbar'
+import DoneIcon from '@material-ui/icons/Done'
+import ClearIcon from '@material-ui/icons/Clear'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
-    return -1;
+    return -1
   }
   if (b[orderBy] > a[orderBy]) {
-    return 1;
+    return 1
   }
-  return 0;
+  return 0
 }
 
 function getComparator(order, orderBy) {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
+    : (a, b) => -descendingComparator(a, b, orderBy)
 }
 
 function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
+  const stabilizedThis = array.map((el, index) => [el, index])
   stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map(el => el[0]);
+    const order = comparator(a[0], b[0])
+    if (order !== 0) return order
+    return a[1] - b[1]
+  })
+  return stabilizedThis.map((el) => el[0])
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
@@ -64,71 +67,93 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
-}));
+}))
 
-const CustomTable = ({ rows,handleAdd }) => {
-  const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('name');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [editMode, setEditMode] = useState(false);
+const CustomTable = ({ rows, handleAdd }) => {
+  const classes = useStyles()
+  const [order, setOrder] = React.useState('asc')
+  const [orderBy, setOrderBy] = React.useState('name')
+  const [selected, setSelected] = React.useState([])
+  const [selectedId, setSelectedId] = React.useState([])
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [editMode, setEditMode] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
 
+  const dispatch = useDispatch()
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
+    const isAsc = orderBy === property && order === 'asc'
+    setOrder(isAsc ? 'desc' : 'asc')
+    setOrderBy(property)
+  }
 
-  const handleSelectAllClick = event => {
+  const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map(n => n.name);
-      setSelected(newSelecteds);
-      return;
+      const newSelecteds = rows.map((n) => n.name)
+      setSelected(newSelecteds)
+      return
     }
-    setSelected([]);
-  };
+    setSelected([])
+  }
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
+  const handleClick = (event, { name, _id: id }) => {
+    const selectedIndex = selected.indexOf(name)
+
+    let newSelected = []
+    let newSelectedId = []
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, name)
+      newSelectedId = newSelectedId.concat(selectedId, id)
     } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
+      newSelected = newSelected.concat(selected.slice(1))
+      newSelectedId = newSelectedId.concat(selectedId.slice(1))
     } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
+      newSelected = newSelected.concat(selected.slice(0, -1))
+      newSelectedId = newSelectedId.concat(selectedId.slice(0, -1))
     } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      )
+      newSelectedId = newSelectedId.concat(
+        selectedId.slice(0, selectedIndex),
+        selectedId.slice(selectedIndex + 1)
+      )
     }
 
-    setSelected(newSelected);
-  };
+    setSelected(newSelected)
+    setSelectedId(newSelectedId)
+  }
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
 
   const handleEditMode = () => {
-    setEditMode(true);
-  };
+    setEditMode(true)
+  }
 
   const handleCancelEditMode = () => {
-    setEditMode(false);
-  };
+    setEditMode(false)
+  }
 
-  const isSelected = name => selected.indexOf(name) !== -1;
+  const handleDelete = (event) => {
+    dispatch(deleteTask(selectedId))
+    setSelected([])
+    setSelectedId([])
+  }
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const isSelected = (name) => selected.indexOf(name) !== -1
+
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
 
   return (
     <div className={classes.root}>
@@ -139,9 +164,14 @@ const CustomTable = ({ rows,handleAdd }) => {
           handleEditMode={handleEditMode}
           handleCancelEditMode={handleCancelEditMode}
           handleAdd={handleAdd}
+          handleDelete={handleDelete}
         />
         <TableContainer>
-          <Table className={classes.table} aria-labelledby='tableTitle' aria-label='enhanced table'>
+          <Table
+            className={classes.table}
+            aria-labelledby='tableTitle'
+            aria-label='enhanced table'
+          >
             <CustomTableHead
               classes={classes}
               numSelected={selected.length}
@@ -157,17 +187,20 @@ const CustomTable = ({ rows,handleAdd }) => {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                  const isItemSelected = isSelected(row.name)
+                  const labelId = `enhanced-table-checkbox-${index}`
                   return (
-                    
                     <TableRow
                       hover={editMode}
-                      onClick={editMode ? event => handleClick(event, row.name) : undefined}
+                      onClick={
+                        editMode
+                          ? (event) => handleClick(event, row)
+                          : undefined
+                      }
                       role='checkbox'
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.id}
+                      key={row._id}
                       selected={isItemSelected}
                     >
                       <TableCell padding='checkbox'>
@@ -180,16 +213,25 @@ const CustomTable = ({ rows,handleAdd }) => {
                           />
                         )}
                       </TableCell>
-                      <TableCell component='th' id={labelId} scope='row' padding='none'>
+                      <TableCell
+                        component='th'
+                        id={labelId}
+                        scope='row'
+                        padding='none'
+                      >
                         {row.name}
                       </TableCell>
                       <TableCell align='left'>{row.area}</TableCell>
                       <TableCell align='left'>{row.deviceType}</TableCell>
                       <TableCell align='left'>
-                        {row.status.completed ? <DoneIcon color='action' /> : <ClearIcon color='error' />}
+                        {row.status.completed ? (
+                          <DoneIcon color='action' />
+                        ) : (
+                          <ClearIcon color='error' />
+                        )}
                       </TableCell>
                     </TableRow>
-                  );
+                  )
                 })}
               {emptyRows > 0 && (
                 <TableRow
@@ -214,7 +256,7 @@ const CustomTable = ({ rows,handleAdd }) => {
         />
       </Paper>
     </div>
-  );
-};
+  )
+}
 
-export default CustomTable;
+export default CustomTable

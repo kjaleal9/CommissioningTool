@@ -32,7 +32,7 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const CustomToolbar = props => {
   const classes = useToolbarStyles();
-  const { numSelected, editMode, handleEditMode, handleCancelEditMode, handleAdd } = props;
+  const { numSelected, editMode, handleEditMode, handleCancelEditMode, handleAdd, handleDelete } = props;
 
   return (
     <Toolbar
