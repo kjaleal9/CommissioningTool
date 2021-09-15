@@ -5,6 +5,7 @@ const taskSchema = mongoose.Schema(
     name: {
       type: String,
       required: true,
+      unique: true,
     },
     area: {
       type: String,

@@ -66,7 +66,7 @@ const deleteTask = asyncHandler(async (req, res) => {
 
     if (task) {
       await task.remove()
-      console.log('removed',task)
+      console.log('removed', task)
       res.json({ message: 'Task removed', deletedTask: task })
     } else {
       res.status(404)
@@ -91,9 +91,24 @@ const createTask = asyncHandler(async (req, res) => {
       taskType,
       deviceType,
     })
-
-    const createdTask = await task.save()
-    res.status(201).json({ createdTask })
+    try {
+      const createdTask = await task.save()
+      res.status(201).json({ createdTask })
+    } catch (error) {
+      console.log(error)
+      if (error.code === 11000) {
+        res
+          .status(400)
+          .json({
+            message: `Duplicate Key: ${error.keyValue.name}`,
+            error: error,
+          })
+      } else {
+        res
+          .status(400)
+          .json({ message: 'Request not valid bishhh', error: error })
+      }
+    }
   }
 })
 

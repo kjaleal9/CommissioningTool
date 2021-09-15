@@ -26,6 +26,8 @@ import { format } from 'date-fns'
 import CustomTable from '../components/Table/CustomTable'
 import { getTasks, addTask } from '../actions/taskActions'
 import { getAreas } from '../actions/areaActions'
+import Alert from '@material-ui/lab/Alert'
+import Snackbar from '@material-ui/core/Snackbar'
 
 const useStyles = makeStyles((theme) => ({
   service: {
@@ -49,7 +51,7 @@ export default function ProjectManagerScreen() {
   const taskList = useSelector((state) => state.taskList)
   const areaList = useSelector((state) => state.areaList)
 
-  const { loading: loadingTasks, tasks, error: errorTasks } = taskList
+  let { loading: loadingTasks, tasks, error: errorTasks } = taskList
   const { loading: loadingAreas, areas, error: errorAreas } = areaList
 
   const dispatch = useDispatch()
@@ -88,6 +90,15 @@ export default function ProjectManagerScreen() {
     setDialogOpen(true)
   }
 
+  const handleCloseAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      console.log(reason)
+      return
+    }
+
+    console.log(reason)
+  }
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container direction='column'>
@@ -118,7 +129,7 @@ export default function ProjectManagerScreen() {
           </Grid>
         </Grid>
 
-        <Grid item style={{ marginBottom: '15em', marginTop: '2em' }}>
+        <Grid item style={{ marginTop: '2em' }}>
           <CustomTable rows={tasks} handleAdd={handleAdd} />
         </Grid>
 
@@ -279,6 +290,15 @@ export default function ProjectManagerScreen() {
             </Grid>
           </DialogContent>
         </Dialog>
+        <Snackbar
+          open={errorTasks}
+          autoHideDuration={6000}
+          onClose={handleCloseAlert}
+        >
+          <Alert severity='error' onClose={handleCloseAlert}>
+            {errorTasks}
+          </Alert>
+        </Snackbar>
       </Grid>
     </MuiPickersUtilsProvider>
   )

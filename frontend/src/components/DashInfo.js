@@ -18,6 +18,7 @@ import {
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import MailIcon from '@material-ui/icons/Mail'
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,7 +63,7 @@ const DashInfo = ({ area }) => {
             onChange={handleChange('panel1')}
           >
             <AccordionSummary
-              expandIcon={<MailIcon />}
+              expandIcon={<ExpandMoreIcon />}
               aria-controls='panel1bh-content'
               id='panel1bh-header'
             >
@@ -94,9 +95,6 @@ const DashInfo = ({ area }) => {
 
           <Divider />
           <Divider />
-          <Typography variant='h6' component='h5'>
-            Tickets
-          </Typography>
           <Box margin='auto' textAlign='center'>
             <Box display='flex' justifyContent='space-around'>
               <Link href="/">

@@ -1,6 +1,6 @@
 const tasks = [
   {
-    name: 'V20500',
+    name: 'V20502',
     taskType: 'Control Module',
     deviceType: 'Valve',
     area: 'Batching',
@@ -12,6 +12,9 @@ const tasks = [
     area: 'Cream',
     status: {
       completed: true,
+      electrical: true,
+      mechanical: true,
+      automation: true,
     },
   },
   {
@@ -20,7 +23,7 @@ const tasks = [
     deviceType: 'Motor',
     area: 'Cream',
     status: {
-      completed: true,
+      automation: true,
     },
   },
   {
@@ -33,7 +36,7 @@ const tasks = [
     },
   },
   {
-    name: 'V20500',
+    name: 'V20501',
     taskType: 'Control Module',
     deviceType: 'Valve',
     area: 'Separation',
@@ -44,7 +47,8 @@ const tasks = [
     deviceType: 'Motor',
     area: 'Cream',
     status: {
-      completed: true,
+      mechanical: true,
+      electrical: true,
     },
   },
   {
@@ -54,6 +58,7 @@ const tasks = [
     area: 'Batching',
     status: {
       electrical: true,
+      automation: true,
     },
   },
   {
@@ -62,7 +67,7 @@ const tasks = [
     deviceType: 'Digital Input',
     area: 'Batching',
     status: {
-      electrical: true,
+      mechanical: true,
     },
   },
   {
@@ -71,7 +76,10 @@ const tasks = [
     deviceType: 'Digital Input',
     area: 'Batching',
     status: {
+      completed: true,
       electrical: true,
+      mechanical: true,
+      automation: true,
     },
   },
   {
@@ -80,7 +88,10 @@ const tasks = [
     deviceType: 'Digital Input',
     area: 'Batching',
     status: {
+      completed: true,
       electrical: true,
+      mechanical: true,
+      automation: true,
     },
   },
   {

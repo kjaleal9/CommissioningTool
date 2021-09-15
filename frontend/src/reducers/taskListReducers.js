@@ -18,7 +18,7 @@ export const taskListReducer = (state = { tasks: [] }, action) => {
         tasks: [...state.tasks, action.payload.createdTask],
       }
     case 'ADD_TASK_FAIL':
-      return { loading: false, error: action.payload }
+      return { tasks: [...state.tasks], loading: false, error: action.payload }
 
     case 'DELETE_TASK_REQUEST':
       return { loading: true, tasks: [...state.tasks] }
@@ -33,7 +33,7 @@ export const taskListReducer = (state = { tasks: [] }, action) => {
         tasks: newState,
       }
     case 'DELETE_TASK_FAIL':
-      return { loading: false, error: action.payload }
+      return { tasks: [...state.tasks], loading: false, error: action.payload }
     default:
       return state
   }

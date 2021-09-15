@@ -9,7 +9,10 @@ import {
   Checkbox,
   makeStyles,
   TablePagination,
+  requirePropFactory,
 } from '@material-ui/core'
+import { green } from '@material-ui/core/colors'
+
 
 import { useDispatch } from 'react-redux'
 import { deleteTask } from '../../actions/taskActions'
@@ -18,6 +21,9 @@ import CustomTableHead from './CustomTableHead'
 import CustomToolbar from './CustomToolbar'
 import DoneIcon from '@material-ui/icons/Done'
 import ClearIcon from '@material-ui/icons/Clear'
+import FlashOnIcon from '@material-ui/icons/FlashOn'
+import BuildIcon from '@material-ui/icons/Build'
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -224,10 +230,17 @@ const CustomTable = ({ rows, handleAdd }) => {
                       <TableCell align='left'>{row.area}</TableCell>
                       <TableCell align='left'>{row.deviceType}</TableCell>
                       <TableCell align='left'>
-                        {row.status.completed ? (
-                          <DoneIcon color='action' />
-                        ) : (
-                          <ClearIcon color='error' />
+                        {row.status.completed && (
+                          <DoneIcon style={{ color: green[500] }} />
+                        )}
+                        {row.status.mechanical && !row.status.completed && (
+                          <BuildIcon color='action' fontSize='small' />
+                        )}
+                        {row.status.automation && !row.status.completed && (
+                          <SportsEsportsIcon color='action' fontSize='small' />
+                        )}
+                        {row.status.electrical && !row.status.completed && (
+                          <FlashOnIcon color='action' fontSize='small' />
                         )}
                       </TableCell>
                     </TableRow>
