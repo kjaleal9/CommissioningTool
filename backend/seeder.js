@@ -1,12 +1,16 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import colors from 'colors'
+
 import users from './data/users.js'
 import tasks from './data/tasks.js'
 import areas from './data/areas.js'
+import cmTypes from './data/cmTypes.js'
+
 import Area from './models/areaModel.js'
 import User from './models/userModel.js'
 import Task from './models/TaskModel.js'
+import CmType from './models/CmTypeModel.js'
 import connectDB from './config/db.js'
 
 dotenv.config()
@@ -18,6 +22,7 @@ const importData = async () => {
     await Task.deleteMany()
     await User.deleteMany()
     await Area.deleteMany()
+    await CmType.deleteMany()
 
     const createdUsers = await User.insertMany(users)
 
@@ -29,6 +34,7 @@ const importData = async () => {
 
     await Task.insertMany(sampleTasks)
     await Area.insertMany(areas)
+    await CmType.insertMany(cmTypes)
 
     console.log('Data Imported!'.green.inverse)
     process.exit()
@@ -42,6 +48,8 @@ const destroyData = async () => {
   try {
     await Task.deleteMany()
     await User.deleteMany()
+    await Area.deleteMany()
+    await CmType.deleteMany()
 
     console.log('Data Destroyed!'.red.inverse)
     process.exit()

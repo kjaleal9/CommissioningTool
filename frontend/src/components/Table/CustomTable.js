@@ -13,12 +13,12 @@ import {
 } from '@material-ui/core'
 import { green } from '@material-ui/core/colors'
 
-
 import { useDispatch } from 'react-redux'
 import { deleteTask } from '../../actions/taskActions'
 
 import CustomTableHead from './CustomTableHead'
 import CustomToolbar from './CustomToolbar'
+
 import DoneIcon from '@material-ui/icons/Done'
 import ClearIcon from '@material-ui/icons/Clear'
 import FlashOnIcon from '@material-ui/icons/FlashOn'
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   table: {
-    minWidth: 750,
+    minWidth: 600,
   },
   visuallyHidden: {
     border: 0,
@@ -103,7 +103,7 @@ const CustomTable = ({ rows, handleAdd }) => {
     setSelected([])
   }
 
-  const handleClick = (event, { name, _id: id }) => {
+  const handleEditClick = (event, { name, _id: id }) => {
     const selectedIndex = selected.indexOf(name)
 
     let newSelected = []
@@ -131,6 +131,10 @@ const CustomTable = ({ rows, handleAdd }) => {
 
     setSelected(newSelected)
     setSelectedId(newSelectedId)
+  }
+
+  const handleClick = (event, row) => {
+    console.log(event,row)
   }
 
   const handleChangePage = (event, newPage) => {
@@ -177,6 +181,7 @@ const CustomTable = ({ rows, handleAdd }) => {
             className={classes.table}
             aria-labelledby='tableTitle'
             aria-label='enhanced table'
+            size='small'
           >
             <CustomTableHead
               classes={classes}
@@ -197,11 +202,11 @@ const CustomTable = ({ rows, handleAdd }) => {
                   const labelId = `enhanced-table-checkbox-${index}`
                   return (
                     <TableRow
-                      hover={editMode}
+                      hover='true'
                       onClick={
                         editMode
-                          ? (event) => handleClick(event, row)
-                          : undefined
+                          ? (event) => handleEditClick(event, row)
+                          : (event) => handleClick(event,row)
                       }
                       role='checkbox'
                       aria-checked={isItemSelected}

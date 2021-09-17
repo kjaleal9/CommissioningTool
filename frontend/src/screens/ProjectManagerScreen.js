@@ -103,7 +103,7 @@ export default function ProjectManagerScreen() {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container direction='column'>
         <Grid item component={Paper}>
-          <Grid item style={{ marginTop: '2em', marginLeft: '5em' }}>
+          <Grid item style={{ marginTop: '1em', marginLeft: '5em' }}>
             <Typography variant='h1'>Projects</Typography>
           </Grid>
           <Grid item>
@@ -129,7 +129,7 @@ export default function ProjectManagerScreen() {
           </Grid>
         </Grid>
 
-        <Grid item style={{ marginTop: '2em' }}>
+        <Grid item style={{ marginTop: '1em' }}>
           <CustomTable rows={tasks} handleAdd={handleAdd} />
         </Grid>
 
