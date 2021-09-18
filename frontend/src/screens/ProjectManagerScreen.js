@@ -26,6 +26,7 @@ import { format } from 'date-fns'
 import CustomTable from '../components/Table/CustomTable'
 import { getTasks, addTask } from '../actions/taskActions'
 import { getAreas } from '../actions/areaActions'
+import { getCmTypes } from '../actions/cmTypesActions'
 import Alert from '@material-ui/lab/Alert'
 import Snackbar from '@material-ui/core/Snackbar'
 
@@ -50,15 +51,18 @@ export default function ProjectManagerScreen() {
 
   const taskList = useSelector((state) => state.taskList)
   const areaList = useSelector((state) => state.areaList)
+  const cmTypesList = useSelector((state) => state.cmTypesList)
 
   let { loading: loadingTasks, tasks, error: errorTasks } = taskList
   const { loading: loadingAreas, areas, error: errorAreas } = areaList
+  const { loading: loadingCmTypes, cmTypes, error: errorCmTypes } = cmTypesList
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getTasks())
     dispatch(getAreas())
+    dispatch(getCmTypes())
   }, [dispatch])
 
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -226,9 +230,9 @@ export default function ProjectManagerScreen() {
                       value={deviceType}
                       onChange={(event) => setDeviceType(event.target.value)}
                     >
-                      {controlModuleTypes.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {option}
+                      {cmTypes.map((option) => (
+                        <MenuItem key={option.name} value={option.name}>
+                          {option.name}
                         </MenuItem>
                       ))}
                     </Select>
