@@ -1,5 +1,4 @@
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-import { PlayCircleFilledWhite } from '@material-ui/icons'
+import { createTheme } from '@mui/material/styles'
 
 const arcBlue = '#0B72B9'
 const arcOrange = '#FFBA60'
@@ -27,7 +26,7 @@ const danger = '#e74c3c'
 const light = '#ecf0f1'
 const dark = '#7b8a8b'
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     background: {
       default: '#e5e6eb',

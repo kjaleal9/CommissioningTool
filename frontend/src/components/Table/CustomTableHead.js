@@ -1,20 +1,35 @@
-import { Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@material-ui/core';
-import React from 'react';
-import PropTypes from 'prop-types';
+import {
+  Checkbox,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+} from '@mui/material'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const headCells = [
   { id: 'name', label: 'Name', sort: true },
   { id: 'area', label: 'Area', sort: true },
   { id: 'deviceType', label: 'Type', sort: true },
   { id: 'status', label: 'Status', sort: false },
-];
+]
 
-const CustomTableHead = props => {
-  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, editMode } = props;
+const CustomTableHead = (props) => {
+  const {
+    classes,
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+    editMode,
+  } = props
 
-  const createSortHandler = property => event => {
-    onRequestSort(event, property);
-  };
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property)
+  }
 
   return (
     <TableHead>
@@ -29,8 +44,11 @@ const CustomTableHead = props => {
             />
           )}
         </TableCell>
-        {headCells.map(headCell => (
-          <TableCell key={headCell.id} sortDirection={orderBy === headCell.id ? order : false}>
+        {headCells.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
             {headCell.sort ? (
               <TableSortLabel
                 active={orderBy === headCell.id}
@@ -40,7 +58,9 @@ const CustomTableHead = props => {
                 {headCell.label}
                 {orderBy === headCell.id ? (
                   <span className={classes.visuallyHidden}>
-                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                    {order === 'desc'
+                      ? 'sorted descending'
+                      : 'sorted ascending'}
                   </span>
                 ) : null}
               </TableSortLabel>
@@ -51,8 +71,8 @@ const CustomTableHead = props => {
         ))}
       </TableRow>
     </TableHead>
-  );
-};
+  )
+}
 
 CustomTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -62,6 +82,6 @@ CustomTableHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
-};
+}
 
-export default CustomTableHead;
+export default CustomTableHead

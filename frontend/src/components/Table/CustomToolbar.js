@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
-import { IconButton, lighten, Toolbar, Tooltip, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import CancelIcon from '@material-ui/icons/Cancel';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import { Fragment } from 'react';
+import React, { useState } from 'react'
+import {
+  IconButton,
+  lighten,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material'
+import { makeStyles } from '@mui/styles'
+import clsx from 'clsx'
+import PropTypes from 'prop-types'
+import CancelIcon from '@mui/icons-material/Cancel'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
+import AddBoxIcon from '@mui/icons-material/AddBox'
+import FilterListIcon from '@mui/icons-material/FilterList'
+import { Fragment } from 'react'
 
-const useToolbarStyles = makeStyles(theme => ({
+const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
@@ -28,11 +34,18 @@ const useToolbarStyles = makeStyles(theme => ({
   title: {
     flex: '1 1 100%',
   },
-}));
+}))
 
-const CustomToolbar = props => {
-  const classes = useToolbarStyles();
-  const { numSelected, editMode, handleEditMode, handleCancelEditMode, handleAdd, handleDelete } = props;
+const CustomToolbar = (props) => {
+  const classes = useToolbarStyles()
+  const {
+    numSelected,
+    editMode,
+    handleEditMode,
+    handleCancelEditMode,
+    handleAdd,
+    handleDelete,
+  } = props
 
   return (
     <Toolbar
@@ -41,11 +54,21 @@ const CustomToolbar = props => {
       })}
     >
       {numSelected > 0 ? (
-        <Typography className={classes.title} color='inherit' variant='subtitle1' component='div'>
+        <Typography
+          className={classes.title}
+          color='inherit'
+          variant='subtitle1'
+          component='div'
+        >
           {numSelected} selected
         </Typography>
       ) : (
-        <Typography className={classes.title} variant='h5' id='tableTitle' component='div'></Typography>
+        <Typography
+          className={classes.title}
+          variant='h5'
+          id='tableTitle'
+          component='div'
+        ></Typography>
       )}
 
       {numSelected > 0 ? (
@@ -64,7 +87,10 @@ const CustomToolbar = props => {
                 </IconButton>
               </Tooltip>
               <Tooltip title='Cancel edit'>
-                <IconButton aria-label='cancel edit' onClick={handleCancelEditMode}>
+                <IconButton
+                  aria-label='cancel edit'
+                  onClick={handleCancelEditMode}
+                >
                   <CancelIcon />
                 </IconButton>
               </Tooltip>
@@ -86,11 +112,11 @@ const CustomToolbar = props => {
         </Fragment>
       )}
     </Toolbar>
-  );
-};
+  )
+}
 
 CustomToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
-};
+}
 
-export default CustomToolbar;
+export default CustomToolbar

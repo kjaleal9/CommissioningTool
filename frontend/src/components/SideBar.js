@@ -1,27 +1,23 @@
 import React from 'react'
-import { makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles'
+import { makeStyles, ThemeProvider, useTheme } from '@mui/styles'
 
 import PropTypes from 'prop-types'
-import Drawer from '@material-ui/core/Drawer'
-import AppBar from '@material-ui/core/AppBar'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Toolbar from '@material-ui/core/Toolbar'
-import List from '@material-ui/core/List'
-import Badge from '@material-ui/core/Badge'
-import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
+import Drawer from '@mui/material/Drawer'
+import Toolbar from '@mui/material/Toolbar'
+import List from '@mui/material/List'
+import Badge from '@mui/material/Badge'
 
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import DashboardIcon from '@material-ui/icons/Dashboard'
-import AssignmentIcon from '@material-ui/icons/Assignment'
-import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber'
+import ListItem from '@mui/material/ListItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import AssignmentIcon from '@mui/icons-material/Assignment'
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber'
 
-import MailIcon from '@material-ui/icons/Mail'
+import MailIcon from '@mui/icons-material/Mail'
 import SearchBox from './SearchBox'
 import CustomAppBar from './CustomAppBar'
-import { Link } from '@material-ui/core'
+import { Link } from '@mui/material'
 import { Route, MemoryRouter } from 'react-router'
 import { Link as RouterLink } from 'react-router-dom'
 import theme from '../theme'
@@ -45,9 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const MyBadge = () => {
-
-}
+const MyBadge = () => {}
 
 function ListItemLink(props) {
   const theme = useTheme()
@@ -85,8 +79,7 @@ ListItemLink.propTypes = {
 }
 
 export default function ClippedDrawer() {
-  const classes = useStyles()
-  const theme = useTheme()
+  const classes = useStyles(theme)
 
   return (
     <div className={classes.root}>

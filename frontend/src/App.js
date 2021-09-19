@@ -15,12 +15,9 @@ import TicketBar from './components/TicketBar'
 import theme from './theme'
 
 import SideBar from './components/SideBar'
-import {
-  CssBaseline,
-  makeStyles,
-  ThemeProvider,
-  Toolbar,
-} from '@material-ui/core'
+import { CssBaseline, ThemeProvider, Toolbar } from '@mui/material'
+
+import {makeStyles} from '@mui/styles'
 
 // const useStyles = makeStyles((theme) => ({
 //   content: {
@@ -38,7 +35,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <CustomAppBar />
-          <SideBar />
+          {/*<SideBar />*/}
           <main>
             {/*className={classes.content}*/}
             <Toolbar />
@@ -50,7 +47,7 @@ function App() {
               <Route path='/' component={HomeScreen} exact />
             </Container>
           </main>
-          <TicketBar />
+        <TicketBar/>
         </ThemeProvider>
       </div>
     </Router>

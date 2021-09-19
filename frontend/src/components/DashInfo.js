@@ -1,8 +1,8 @@
-import Paper from '@material-ui/core/Paper'
+import Paper from '@mui/material/Paper'
 import React from 'react'
 // import { Button, ProgressBar } from 'react-bootstrap';
-import Container from '@material-ui/core/Container'
-import { makeStyles } from '@material-ui/core/styles'
+import Container from '@mui/material/Container'
+import { makeStyles } from '@mui/styles'
 import {
   Button,
   LinearProgress,
@@ -14,11 +14,11 @@ import {
   AccordionSummary,
   AccordionDetails,
   Typography,
-} from '@material-ui/core'
+} from '@mui/material'
 
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import MailIcon from '@material-ui/icons/Mail'
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import MailIcon from '@mui/icons-material/Mail'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,9 +46,7 @@ const DashInfo = ({ area }) => {
   const { name, items, itemsComplete, tickets } = area
   const { lowPriority, medPriority, highPriority } = tickets
 
-  const handleTicketBarClick = (area) => {
-    
-  }
+  const handleTicketBarClick = (area) => {}
 
   return (
     <Paper className='dashinfo' elevation={3}>
@@ -97,7 +95,7 @@ const DashInfo = ({ area }) => {
           <Divider />
           <Box margin='auto' textAlign='center'>
             <Box display='flex' justifyContent='space-around'>
-              <Link href="/">
+              <Link href='/'>
                 <Box className='dashinfo__low-priority'>
                   <h4>Low</h4>
                   <h2>{lowPriority}</h2>

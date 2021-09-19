@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import InputLabel from '@material-ui/core/InputLabel'
-import AddIcon from '@material-ui/icons/Add'
-import Paper from '@material-ui/core/Paper'
-import Dialog from '@material-ui/core/Dialog'
-import DialogContent from '@material-ui/core/DialogContent'
+import { makeStyles, useTheme } from '@mui/styles'
+
 import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers'
-import DateFnsUtils from '@date-io/date-fns'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import Radio from '@material-ui/core/Radio'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import Button from '@material-ui/core/Button'
-import { format } from 'date-fns'
+  Grid,
+  Typography,
+  TextField,
+  InputAdornment,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  Paper,
+  Dialog,
+  DialogContent,
+  Snackbar,
+  RadioGroup,
+  Radio,
+  Select,
+  MenuItem,
+  Button,
+} from '@mui/material'
+import Alert from '@mui/lab/Alert'
+
+import AddIcon from '@mui/icons-material/Add'
+
 import CustomTable from '../components/Table/CustomTable'
+
 import { getTasks, addTask } from '../actions/taskActions'
 import { getAreas } from '../actions/areaActions'
 import { getCmTypes } from '../actions/cmTypesActions'
-import Alert from '@material-ui/lab/Alert'
-import Snackbar from '@material-ui/core/Snackbar'
 
 const useStyles = makeStyles((theme) => ({
   service: {
@@ -104,7 +104,7 @@ export default function ProjectManagerScreen() {
   }
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <Fragment>
       <Grid container direction='column'>
         <Grid item component={Paper}>
           <Grid item style={{ marginTop: '1em', marginLeft: '5em' }}>
@@ -163,15 +163,7 @@ export default function ProjectManagerScreen() {
                     onChange={(event) => setName(event.target.value)}
                   />
                 </Grid>
-                <Grid item>
-                  <KeyboardDatePicker
-                    fullWidth
-                    format='MM/dd/yyyy'
-                    style={{ marginTop: '5em' }}
-                    value={date}
-                    onChange={(newDate) => setDate(newDate)}
-                  />
-                </Grid>
+                <Grid item></Grid>
                 <Grid
                   item
                   container
@@ -304,6 +296,6 @@ export default function ProjectManagerScreen() {
           </Alert>
         </Snackbar>
       </Grid>
-    </MuiPickersUtilsProvider>
+    </Fragment>
   )
 }

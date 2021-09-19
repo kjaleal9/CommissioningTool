@@ -7,11 +7,10 @@ import {
   TableBody,
   Paper,
   Checkbox,
-  makeStyles,
   TablePagination,
-  requirePropFactory,
-} from '@material-ui/core'
-import { green } from '@material-ui/core/colors'
+} from '@mui/material'
+import { makeStyles } from '@mui/styles'
+import { green } from '@mui/material/colors'
 
 import { useDispatch } from 'react-redux'
 import { deleteTask } from '../../actions/taskActions'
@@ -19,11 +18,11 @@ import { deleteTask } from '../../actions/taskActions'
 import CustomTableHead from './CustomTableHead'
 import CustomToolbar from './CustomToolbar'
 
-import DoneIcon from '@material-ui/icons/Done'
-import ClearIcon from '@material-ui/icons/Clear'
-import FlashOnIcon from '@material-ui/icons/FlashOn'
-import BuildIcon from '@material-ui/icons/Build'
-import SportsEsportsIcon from '@material-ui/icons/SportsEsports'
+import DoneIcon from '@mui/icons-material/Done'
+import ClearIcon from '@mui/icons-material/Clear'
+import FlashOnIcon from '@mui/icons-material/FlashOn'
+import BuildIcon from '@mui/icons-material/Build'
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -77,16 +76,14 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomTable = ({ rows, handleAdd }) => {
   const classes = useStyles()
-  const [order, setOrder] = React.useState('asc')
-  const [orderBy, setOrderBy] = React.useState('name')
-  const [selected, setSelected] = React.useState([])
-  const [selectedId, setSelectedId] = React.useState([])
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const [editMode, setEditMode] = useState(false)
-  const [dialogOpen, setDialogOpen] = useState(false)
-
   const dispatch = useDispatch()
+  const [order, setOrder] = useState('asc')
+  const [orderBy, setOrderBy] = useState('name')
+  const [selected, setSelected] = useState([])
+  const [selectedId, setSelectedId] = useState([])
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [editMode, setEditMode] = useState(false)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -134,7 +131,7 @@ const CustomTable = ({ rows, handleAdd }) => {
   }
 
   const handleClick = (event, row) => {
-    console.log(event,row)
+    console.log(event, row)
   }
 
   const handleChangePage = (event, newPage) => {
@@ -181,7 +178,6 @@ const CustomTable = ({ rows, handleAdd }) => {
             className={classes.table}
             aria-labelledby='tableTitle'
             aria-label='enhanced table'
-            size='small'
           >
             <CustomTableHead
               classes={classes}
@@ -206,7 +202,7 @@ const CustomTable = ({ rows, handleAdd }) => {
                       onClick={
                         editMode
                           ? (event) => handleEditClick(event, row)
-                          : (event) => handleClick(event,row)
+                          : (event) => handleClick(event, row)
                       }
                       role='checkbox'
                       aria-checked={isItemSelected}

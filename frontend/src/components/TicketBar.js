@@ -1,18 +1,15 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import Container from '@material-ui/core/Container'
-import Box from '@material-ui/core/Box'
+import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { getTasks } from '../actions/taskActions'
 import DashInfo from '../components/DashInfo'
-import {
-  Divider,
-  Drawer,
-  makeStyles,
-  Toolbar,
-  Typography,
-} from '@material-ui/core'
+import { Divider, Drawer, Toolbar, Typography } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 
+import theme from '../theme'
+import { useTheme } from '@mui/material/styles'
 const drawerWidth = 320
 
 const useStyles = makeStyles((theme) => ({
@@ -25,12 +22,14 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    background: "#f3faff"
+    background: '#f3faff',
   },
 }))
 
 const TicketBar = () => {
-  const classes = useStyles()
+  const theme = useTheme()
+  // const classes = useStyles(theme)
+  console.log(theme)
   const areas = [
     {
       name: 'Batching',
@@ -124,12 +123,12 @@ const TicketBar = () => {
   //   }, [dispatch])
 
   return (
-    <div className={classes.root}>
+    <div className={theme.root}>
       <Drawer
-        className={classes.drawer}
+        className={theme.drawer}
         variant='permanent'
         classes={{
-          paper: classes.drawerPaper,
+          paper: theme.drawerPaper,
         }}
         anchor='right'
       >

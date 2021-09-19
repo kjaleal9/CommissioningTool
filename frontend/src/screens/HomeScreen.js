@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import { Grid, Typography, Paper } from '@material-ui/core'
+import { Grid, Typography, Paper } from '@mui/material'
 
 const HomeScreen = () => {
   return (
