@@ -4,8 +4,8 @@ import { makeStyles, useTheme } from '@mui/styles'
 
 import {
   Grid,
-  Typography,
   TextField,
+  Typography,
   InputAdornment,
   FormControl,
   FormControlLabel,
@@ -25,6 +25,7 @@ import Alert from '@mui/lab/Alert'
 import AddIcon from '@mui/icons-material/Add'
 
 import CustomTable from '../components/Table/CustomTable'
+// import Typography from '../components/Typography/Primary'
 
 import { getTasks, addTask } from '../actions/taskActions'
 import { getAreas } from '../actions/areaActions'
@@ -67,24 +68,14 @@ export default function ProjectManagerScreen() {
 
   const [dialogOpen, setDialogOpen] = useState(false)
   const [name, setName] = useState('')
-  const [date, setDate] = useState(new Date())
   const [taskType, setTaskType] = useState('')
   const [deviceType, setDeviceType] = useState('')
   const [area, setArea] = useState('')
-
-  const controlModuleTypes = [
-    'Motor',
-    'Digital Input',
-    'Digital Output',
-    'Analog Input',
-    'Analog Output',
-  ]
 
   const addNewTask = () => {
     dispatch(addTask(name, area, taskType, deviceType))
     setDialogOpen(false)
     setName('')
-    setDate(new Date())
     setTaskType('')
     setDeviceType('')
     setArea('')
@@ -99,7 +90,6 @@ export default function ProjectManagerScreen() {
       console.log(reason)
       return
     }
-
     console.log(reason)
   }
 
@@ -108,7 +98,7 @@ export default function ProjectManagerScreen() {
       <Grid container direction='column'>
         <Grid item component={Paper}>
           <Grid item style={{ marginTop: '1em', marginLeft: '5em' }}>
-            <Typography variant='h1'>Projects</Typography>
+            <Typography variant='h3'>Projects</Typography>
           </Grid>
           <Grid item>
             <TextField
