@@ -6,8 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import 'react-pro-sidebar/dist/css/styles.css';
-import './styles/styles.scss';
+// import './styles/styles.scss';
 
 // creates a beautiful scrollbar
 import PerfectScrollbar from 'perfect-scrollbar';
@@ -26,13 +25,6 @@ import styles from './styles/adminStyle.js';
 let ps;
 // import bgImage from 'assets/img/sidebar-1.jpg'
 // import logo from 'assets/img/reactlogo.png'
-
-// const useStyles = makeStyles((theme) => ({
-//   content: {
-//     flexGrow: 1,
-//     padding: theme.spacing(3),
-//   },
-// }))
 
 const switchRoutes = (
   <Switch>
@@ -93,7 +85,7 @@ function App({ ...rest }) {
   return (
     <Router>
       <div className='wrapper'>
-        <CssBaseline />
+        {/* <CssBaseline /> */}
         <Sidebar
           routes={routes}
           logoText={'Commissioning Tool'}
@@ -101,6 +93,7 @@ function App({ ...rest }) {
           // image={bgImage}
           handleDrawerToggle={handleDrawerToggle}
           // open={mobileOpen}
+          color='blue'
           {...rest}
         />
         <div className={classes.mainPanel} ref={mainPanel}>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Form, Button, Card, Badge } from 'react-bootstrap'
+import { Button, Card, Badge } from '@mui/material'
 import { Fragment } from 'react'
 
 import { getTasks } from '../actions/taskActions'

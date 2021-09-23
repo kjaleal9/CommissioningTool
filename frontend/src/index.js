@@ -1,16 +1,16 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import { ThemeProvider } from '@mui/styles'
-import ReactDOM from 'react-dom'
-import store from './store'
+import React from 'react';
+import { Provider } from 'react-redux';
+import { ThemeProvider } from '@mui/material/styles';
+import ReactDOM from 'react-dom';
+import store from './store';
 //import './bootstrap2.css';
 
-import theme from './theme'
+import theme from './theme';
 
-import App from './App'
-import * as serviceWorker from './serviceWorker'
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 
-import './styles/material-dashboard-react.css?v=1.10.0'
+import './styles/material-dashboard-react.css?v=1.10.0';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -19,6 +19,6 @@ ReactDOM.render(
     </ThemeProvider>
   </Provider>,
   document.getElementById('root')
-)
+);
 
-serviceWorker.unregister()
+serviceWorker.unregister();

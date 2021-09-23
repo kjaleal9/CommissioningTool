@@ -1,149 +1,108 @@
 /*eslint-disable*/
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink, useLocation } from 'react-router-dom';
 // @material-ui/core components
-import {
-  Drawer,
-  Hidden,
-  List,
-  ListItem,
-  ListItemText,
-  Icon,
-} from '@mui/material';
 import { makeStyles } from '@mui/styles';
-// core components
-import AdminNavbarLinks from '../Navbars/AdminNavbarLinks.js';
+import { Drawer, Paper, Box, ListItemButton } from '@mui/material';
+import Hidden from '@mui/material/Hidden';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Icon from '@mui/material/Icon';
 
 import styles from './sidebarStyle.js';
+import {
+  drawerWidth,
+  transition,
+  boxShadow,
+  defaultFont,
+  primaryColor,
+  primaryBoxShadow,
+  infoColor,
+  successColor,
+  warningColor,
+  dangerColor,
+  whiteColor,
+  grayColor,
+  blackColor,
+  hexToRgb,
+} from '../../styles/material-dashboard-react.js';
 
 const useStyles = makeStyles(styles);
 
 export default function Sidebar(props) {
   const classes = useStyles();
   let location = useLocation();
+  console.log(location)
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
     return location.pathname === routeName;
   }
-
   const { color, logo, image, logoText, routes } = props;
-
   var links = (
-    <List className={classes.list}>
+    // <List className={classes.list}>
+    <List
+      sx={{
+        marginTop: '20px',
+        paddingLeft: '0',
+        paddingTop: '0',
+        paddingBottom: '0',
+        marginBottom: '0',
+        listStyle: 'none',
+        position: 'unset',
+      }}
+    >
       {routes.map((prop, key) => {
-        var activePro = ' ';
-        var listItemClasses;
-        if (prop.path === '/upgrade-to-pro') {
-          activePro = classes.activePro + ' ';
-          listItemClasses = classNames({
-            [' ' + classes[color]]: true,
-          });
-        } else {
-          listItemClasses = classNames({
-            [' ' + classes[color]]: activeRoute(prop.path),
-          });
-        }
-        const whiteFontClasses = classNames({
-          [' ' + classes.whiteFont]: activeRoute(prop.path),
-        });
         return (
-          <NavLink
-            to={prop.path}
-            className={activePro + classes.item}
-            activeClassName='active'
-            key={key}
-          >
-            <ListItem button className={classes.itemLink + listItemClasses}>
-              {typeof prop.icon === 'string' ? (
-                <Icon
-                  className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive,
-                  })}
-                >
-                  {prop.icon}
-                </Icon>
-              ) : (
-                <prop.icon
-                  className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive,
-                  })}
-                />
-              )}
+          <NavLink to={prop.path} activeClassName='active' key={key}>
+            <ListItemButton
+              className={
+                activeRoute(prop.path) ? classes.itemLink + ' ' + classes.blue : classes.itemLink
+              }
+            >
+              <prop.icon className={classes.itemIcon} />
               <ListItemText
-                primary={props.rtlActive ? prop.rtlName : prop.name}
-                className={classNames(classes.itemText, whiteFontClasses, {
-                  [classes.itemTextRTL]: props.rtlActive,
-                })}
+                primary={prop.name}
+                className={classes.itemText}
                 disableTypography={true}
               />
-            </ListItem>
+            </ListItemButton>
           </NavLink>
         );
       })}
     </List>
   );
-
   var brand = (
     <div className={classes.logo}>
       <a
-        href='#'
-        className={classNames(classes.logoLink, {
-          [classes.logoLinkRTL]: props.rtlActive,
-        })}
+        href='https://www.creative-tim.com?ref=mdr-sidebar'
+        className={classNames(classes.logoLink)}
         target='_blank'
       >
-        {/*
-        <div className={classes.logoImage}>
-          <img src={logo} alt='logo' className={classes.img} />
-        </div>
-      */}
         {logoText}
       </a>
     </div>
   );
-
   return (
-    <div>
-      <Hidden mdUp implementation='css'>
-        <Drawer
-          variant='temporary'
-          anchor={props.rtlActive ? 'left' : 'right'}
-          open={props.open}
-          classes={{
-            paper: classNames(classes.drawerPaper),
-          }}
-          onClose={props.handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-        >
+    <Fragment>
+      <Drawer
+        sx={{ display: { xl: 'block', xs: 'block' }, background: '#123456' }}
+        anchor={props.rtlActive ? 'right' : 'left'}
+        variant='permanent'
+        open
+        classes={{
+          root: { background: '#123456' },
+          paper: classNames(classes.drawerPaper),
+        }}
+      >
+        <Box className={classes.sidebarWrapper} sx={{ background: '#123456' }}>
           {brand}
-          <div>aafwedkljfhaksdflkjhawefawf</div>
-          <div className={classes.sidebarWrapper}>{links}</div>
-        </Drawer>
-      </Hidden>
-      <Hidden smDown implementation='css'>
-        <Drawer
-          anchor={props.rtlActive ? 'right' : 'left'}
-          variant='permanent'
-          open
-          classes={{
-            paper: classNames(classes.drawerPaper),
-          }}
-        >
-          {brand}
-          <div className={classes.sidebarWrapper}>{links}</div>
-          {image !== undefined ? (
-            <div
-              className={classes.background}
-              style={{ backgroundImage: 'url(' + image + ')' }}
-            />
-          ) : null}
-        </Drawer>
-      </Hidden>
-    </div>
+          {links}
+        </Box>
+      </Drawer>
+    </Fragment>
   );
 }
 
