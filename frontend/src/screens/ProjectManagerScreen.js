@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles, useTheme } from '@mui/styles'
+import React, { Fragment, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@mui/styles';
 
 import {
   Grid,
@@ -19,19 +19,19 @@ import {
   Select,
   MenuItem,
   Button,
-} from '@mui/material'
-import Alert from '@mui/lab/Alert'
+} from '@mui/material';
+import Alert from '@mui/lab/Alert';
 
-import AddIcon from '@mui/icons-material/Add'
+import AddIcon from '@mui/icons-material/Add';
 
-import CustomTable from '../components/Table/CustomTable'
+import CustomTable from '../components/Table/CustomTable';
 // import Typography from '../components/Typography/Primary'
 
-import { getTasks, addTask } from '../actions/taskActions'
-import { getAreas } from '../actions/areaActions'
-import { getCmTypes } from '../actions/cmTypesActions'
+import { getTasks, addTask } from '../actions/taskActions';
+import { getAreas } from '../actions/areaActions';
+import { getCmTypes } from '../actions/cmTypesActions';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   service: {
     fontWeight: 300,
   },
@@ -44,69 +44,77 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.light,
     },
   },
-}))
+}));
 
 export default function ProjectManagerScreen() {
-  const classes = useStyles()
-  const theme = useTheme()
+  const classes = useStyles();
+  const taskList = useSelector(state => state.taskList);
+  const areaList = useSelector(state => state.areaList);
+  const cmTypesList = useSelector(state => state.cmTypesList);
 
-  const taskList = useSelector((state) => state.taskList)
-  const areaList = useSelector((state) => state.areaList)
-  const cmTypesList = useSelector((state) => state.cmTypesList)
+  let { loading: loadingTasks, tasks, error: errorTasks } = taskList;
+  const { loading: loadingAreas, areas, error: errorAreas } = areaList;
+  const { loading: loadingCmTypes, cmTypes, error: errorCmTypes } = cmTypesList;
 
-  let { loading: loadingTasks, tasks, error: errorTasks } = taskList
-  const { loading: loadingAreas, areas, error: errorAreas } = areaList
-  const { loading: loadingCmTypes, cmTypes, error: errorCmTypes } = cmTypesList
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTasks())
-    dispatch(getAreas())
-    dispatch(getCmTypes())
-  }, [dispatch])
+    dispatch(getTasks());
+    dispatch(getAreas());
+    dispatch(getCmTypes());
+  }, [dispatch]);
 
-  const [dialogOpen, setDialogOpen] = useState(false)
-  const [name, setName] = useState('')
-  const [taskType, setTaskType] = useState('')
-  const [deviceType, setDeviceType] = useState('')
-  const [area, setArea] = useState('')
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [taskType, setTaskType] = useState('');
+  const [deviceType, setDeviceType] = useState('');
+  const [area, setArea] = useState('');
 
   const addNewTask = () => {
-    dispatch(addTask(name, area, taskType, deviceType))
-    setDialogOpen(false)
-    setName('')
-    setTaskType('')
-    setDeviceType('')
-    setArea('')
-  }
+    dispatch(addTask(name, area, taskType, deviceType));
+    setDialogOpen(false);
+    setName('');
+    setTaskType('');
+    setDeviceType('');
+    setArea('');
+  };
 
   const handleAdd = () => {
-    setDialogOpen(true)
-  }
+    setDialogOpen(true);
+  };
 
   const handleCloseAlert = (event, reason) => {
     if (reason === 'clickaway') {
-      console.log(reason)
-      return
+      console.log(reason);
+      return;
     }
-    console.log(reason)
-  }
+    console.log(reason);
+  };
 
   return (
     <Fragment>
       <Grid container direction='column'>
-        <Grid item component={Paper}>
-          <Grid item style={{ marginTop: '1em', marginLeft: '5em' }}>
-            <Typography variant='h3'>Projects</Typography>
+        <Grid container component={Paper} style={{ marginBottom: '5em' }}>
+          <Grid
+            item
+            style={{ marginTop: '1em', marginLeft: '5em' }}
+            xs={12}
+            xl={4}
+          >
+            <Typography variant='h1'>Projects</Typography>
           </Grid>
-          <Grid item>
+
+          <Grid
+            item
+            xs={12}
+            xl={6}
+            style={{ marginTop: '3em', marginLeft: '5em' }}
+          >
             <TextField
               placeholder='Search project details or create a new entry'
               style={{
                 width: '35em',
                 marginLeft: '5em',
-                marginBottom: '5em',
               }}
               InputProps={{
                 endAdornment: (
@@ -150,7 +158,7 @@ export default function ProjectManagerScreen() {
                     label='Name'
                     id='name'
                     value={name}
-                    onChange={(event) => setName(event.target.value)}
+                    onChange={event => setName(event.target.value)}
                   />
                 </Grid>
                 <Grid item></Grid>
@@ -170,7 +178,7 @@ export default function ProjectManagerScreen() {
                         aria-label='TaskType'
                         name='taskType'
                         value={taskType}
-                        onChange={(event) => setTaskType(event.target.value)}
+                        onChange={event => setTaskType(event.target.value)}
                       >
                         <FormControlLabel
                           classes={{
@@ -210,9 +218,9 @@ export default function ProjectManagerScreen() {
                       fullWidth
                       displayEmpty
                       value={deviceType}
-                      onChange={(event) => setDeviceType(event.target.value)}
+                      onChange={event => setDeviceType(event.target.value)}
                     >
-                      {cmTypes.map((option) => (
+                      {cmTypes.map(option => (
                         <MenuItem key={option.name} value={option.name}>
                           {option.name}
                         </MenuItem>
@@ -230,9 +238,9 @@ export default function ProjectManagerScreen() {
                       fullWidth
                       displayEmpty
                       value={area}
-                      onChange={(event) => setArea(event.target.value)}
+                      onChange={event => setArea(event.target.value)}
                     >
-                      {areas.map((option) => (
+                      {areas.map(option => (
                         <MenuItem key={option.name} value={option.name}>
                           {option.name}
                         </MenuItem>
@@ -287,5 +295,5 @@ export default function ProjectManagerScreen() {
         </Snackbar>
       </Grid>
     </Fragment>
-  )
+  );
 }

@@ -8,7 +8,7 @@ import { makeStyles } from '@mui/styles'
 // @material-ui/icons
 
 // core components
-import styles from './cardHeaderStyle'
+import styles from './CardStyles/cardHeaderStyle'
 
 const useStyles = makeStyles(styles)
 
@@ -23,6 +23,7 @@ export default function CardHeader(props) {
     [classes.cardHeaderIcon]: icon,
     [className]: className !== undefined,
   })
+  console.log(cardHeaderClasses)
   return (
     <div className={cardHeaderClasses} {...rest}>
       {children}

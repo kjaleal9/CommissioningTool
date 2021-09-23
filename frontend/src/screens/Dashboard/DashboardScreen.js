@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 // react plugin for creating charts
 import ChartistGraph from 'react-chartist'
 
-import { Typography, Paper } from '@mui/material'
+import { Typography } from '@mui/material'
 
 import {
   Warning,
@@ -20,32 +20,33 @@ import {
 
 import { makeStyles } from '@mui/styles'
 
-import Card from '../components/Card/Card.js'
-import CardHeader from '../components/Card/CardHeader.js'
-import CardIcon from '../components/Card/CardIcon.js'
-import CardBody from '../components/Card/CardBody.js'
-import CardFooter from '../components/Card/CardFooter.js'
-import GridItem from '../components/Grid/GridItem.js'
-import GridContainer from '../components/Grid/GridContainer.js'
-import Table from '../components/CardTable/Table.js'
-import Tasks from '../components/Tasks/Tasks.js'
-import CustomTabs from '../components/CustomTabs/CustomTabs.js'
-import Danger from '../components/Typography/Danger.js'
+import Card from '../../components/Card/Card'
+import CardHeader from '../../components/Card/CardHeader.js'
+import CardIcon from '../../components/Card/CardIcon.js'
+import CardBody from '../../components/Card/CardBody.js'
+import CardFooter from '../../components/Card/CardFooter.js'
+import GridItem from '../../components/Grid/GridItem.js'
+import GridContainer from '../../components/Grid/GridContainer.js'
+import Table from '../../components/CardTable/Table.js'
+import Tasks from '../../components/Tasks/Tasks.js'
+import CustomTabs from '../../components/CustomTabs/CustomTabs.js'
+import Danger from '../../components/Typography/Danger.js'
 
 import styles from './dashboardStyle.js'
 
-import { bugs, website, server } from '../variables/general.js'
+import { bugs, website, server } from '../../variables/general'
 
 import {
   dailySalesChart,
   emailsSubscriptionChart,
   completedTasksChart,
-} from '../variables/charts.js'
+} from '../../variables/charts.js'
 
 const useStyles = makeStyles(styles)
 
-const HomeScreen = () => {
+const DashboardScreen = () => {
   const classes = useStyles()
+  
   return (
     <Fragment>
       <GridContainer>
@@ -53,11 +54,10 @@ const HomeScreen = () => {
           <Typography variant='h1'>Dashboard</Typography>
         </GridItem>
       </GridContainer>
-
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color='rose' stats icon>
+            <CardHeader color='warning' stats icon>
               <CardIcon color='warning'>
                 <Accessibility />
               </CardIcon>
@@ -273,4 +273,4 @@ const HomeScreen = () => {
   )
 }
 
-export default HomeScreen
+export default DashboardScreen

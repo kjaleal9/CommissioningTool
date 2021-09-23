@@ -4,5 +4,7 @@ const cmTypes = [
   { name: 'Digital Output' },
   { name: 'Analog Input' },
   { name: 'Analog Output' },
+  { name: 'Counter' },
+  { name: 'Valve' },
 ]
 export default cmTypes

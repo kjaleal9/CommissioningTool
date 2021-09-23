@@ -49,48 +49,46 @@ $breakpoint-lg: 992px !default;
 $breakpoint-xl: 1200px !default;
 
 @import '~react-pro-sidebar/dist/scss/styles.scss';
-body{
-    background-color: #fff;
-   
+body {
+  background-color: #fff;
 }
 
-.header{
-    border-bottom: 1px solid $dark;
-    margin-bottom: 10px;
+.header {
+  border-bottom: 1px solid $dark;
+  margin-bottom: 10px;
 }
 
-
-.dashinfo{
-    width: 300px;
-    background-color: $light;
-    margin: 5px;
+.dashinfo {
+  width: 300px;
+  background-color: $light;
+  margin: 5px;
 }
 
-.dashinfo__numbers{
-    display: flex;
-    flex-direction: row;
+.dashinfo__numbers {
+  display: flex;
+  flex-direction: row;
 }
 
-.dashinfo__numbers{
-    display: flex;
-    flex-direction:row;
-    justify-content: space-around;
+.dashinfo__numbers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
-.dashinfo__low-priority{
-    color: $info;
-    text-align: center;
-    &:hover{
-        cursor:pointer;
-    }
+.dashinfo__low-priority {
+  color: $info;
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-.dashinfo__med-priority{
-    color: $warning;
-    text-align: center;
+.dashinfo__med-priority {
+  color: $warning;
+  text-align: center;
 }
 
-.dashinfo__high-priority{
-    color: $danger;
-    text-align: center;
+.dashinfo__high-priority {
+  color: $danger;
+  text-align: center;
 }
