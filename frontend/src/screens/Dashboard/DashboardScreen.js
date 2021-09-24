@@ -1,9 +1,7 @@
-import React, { Fragment } from 'react'
-// react plugin for creating charts
-import ChartistGraph from 'react-chartist'
+import React, { Fragment } from 'react';
+import ChartistGraph from 'react-chartist';
 
-import { Typography } from '@mui/material'
-
+import { Typography } from '@mui/material';
 import {
   Warning,
   DateRange,
@@ -16,43 +14,47 @@ import {
   BugReport,
   Code,
   Cloud,
-} from '@mui/icons-material'
+} from '@mui/icons-material';
 
-import { makeStyles } from '@mui/styles'
+import { makeStyles } from '@mui/styles';
 
-import Card from '../../components/Card/Card'
-import CardHeader from '../../components/Card/CardHeader.js'
-import CardIcon from '../../components/Card/CardIcon.js'
-import CardBody from '../../components/Card/CardBody.js'
-import CardFooter from '../../components/Card/CardFooter.js'
-import GridItem from '../../components/Grid/GridItem.js'
-import GridContainer from '../../components/Grid/GridContainer.js'
-import Table from '../../components/CardTable/Table.js'
-import Tasks from '../../components/Tasks/Tasks.js'
-import CustomTabs from '../../components/CustomTabs/CustomTabs.js'
-import Danger from '../../components/Typography/Danger.js'
+import Card from '../../components/Card/Card';
+import CardHeader from '../../components/Card/CardHeader.js';
+import CardIcon from '../../components/Card/CardIcon.js';
+import CardBody from '../../components/Card/CardBody.js';
+import CardFooter from '../../components/Card/CardFooter.js';
+import GridItem from '../../components/Grid/GridItem.js';
+import GridContainer from '../../components/Grid/GridContainer.js';
+import Table from '../../components/CardTable/Table.js';
+import Tasks from '../../components/Tasks/Tasks.js';
+import CustomTabs from '../../components/CustomTabs/CustomTabs.js';
+import Danger from '../../components/Typography/Danger.js';
 
-import styles from './dashboardStyle.js'
+import styles from './dashboardStyle.js';
 
-import { bugs, website, server } from '../../variables/general'
+import { bugs, website, server } from '../../variables/general';
 
 import {
   dailySalesChart,
   emailsSubscriptionChart,
   completedTasksChart,
-} from '../../variables/charts.js'
+} from '../../variables/charts.js';
 
-const useStyles = makeStyles(styles)
+const useStyles = makeStyles(styles);
 
 const DashboardScreen = () => {
-  const classes = useStyles()
-  
+  const classes = useStyles();
+
   return (
     <Fragment>
-      <GridContainer>
-        <GridItem xs={12} sm={6} md={3}>
-          <Typography variant='h1'>Dashboard</Typography>
+      <GridContainer
+        direction='row'
+        sx={{ alignItems: 'center', justifyContent: 'space-between' }}
+      >
+        <GridItem xl={12}>
+          <Typography variant='h2'>Dashboard</Typography>
         </GridItem>
+  
       </GridContainer>
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
@@ -71,7 +73,7 @@ const DashboardScreen = () => {
                 <Danger>
                   <Warning />
                 </Danger>
-                <a href='#pablo' onClick={(e) => e.preventDefault()}>
+                <a href='#pablo' onClick={e => e.preventDefault()}>
                   Get more space
                 </a>
               </div>
@@ -270,7 +272,7 @@ const DashboardScreen = () => {
         </GridItem>
       </GridContainer>
     </Fragment>
-  )
-}
+  );
+};
 
-export default DashboardScreen
+export default DashboardScreen;

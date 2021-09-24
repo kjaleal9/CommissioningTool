@@ -32,48 +32,32 @@ import {
 
 const useStyles = makeStyles(styles);
 
+const listButtonStyle = {
+  width: 'auto',
+  transition: 'all 300ms linear',
+  margin: '10px 15px 0',
+  borderRadius: '3px',
+  position: 'relative',
+  display: 'block',
+  padding: '10px 15px',
+  backgroundColor: 'transparent',
+  ':hover': { backgroundColor: 'rgba(123,123,123,.5)' },
+  color: 'rgba(10,10,50,.85)',
+  fontWeight: '300',
+  verticalAlign: 'middle'
+};
+
 export default function Sidebar(props) {
   const classes = useStyles();
   let location = useLocation();
-  console.log(location)
+
+  console.log(location);
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
     return location.pathname === routeName;
   }
   const { color, logo, image, logoText, routes } = props;
-  var links = (
-    // <List className={classes.list}>
-    <List
-      sx={{
-        marginTop: '20px',
-        paddingLeft: '0',
-        paddingTop: '0',
-        paddingBottom: '0',
-        marginBottom: '0',
-        listStyle: 'none',
-        position: 'unset',
-      }}
-    >
-      {routes.map((prop, key) => {
-        return (
-          <NavLink to={prop.path} activeClassName='active' key={key}>
-            <ListItemButton
-              className={
-                activeRoute(prop.path) ? classes.itemLink + ' ' + classes.blue : classes.itemLink
-              }
-            >
-              <prop.icon className={classes.itemIcon} />
-              <ListItemText
-                primary={prop.name}
-                className={classes.itemText}
-                disableTypography={true}
-              />
-            </ListItemButton>
-          </NavLink>
-        );
-      })}
-    </List>
-  );
+
   var brand = (
     <div className={classes.logo}>
       <a
@@ -89,17 +73,60 @@ export default function Sidebar(props) {
     <Fragment>
       <Drawer
         sx={{ display: { xl: 'block', xs: 'block' }, background: '#123456' }}
-        anchor={props.rtlActive ? 'right' : 'left'}
+        anchor='left'
         variant='permanent'
         open
         classes={{
-          root: { background: '#123456' },
           paper: classNames(classes.drawerPaper),
         }}
       >
-        <Box className={classes.sidebarWrapper} sx={{ background: '#123456' }}>
+        <Box
+          className={classes.sidebarWrapper}
+          sx={{ background: primaryColor[0] }}
+        >
           {brand}
-          {links}
+          <List
+            sx={{
+              marginTop: '20px',
+              paddingLeft: '0',
+              paddingTop: '0',
+              paddingBottom: '0',
+              marginBottom: '0',
+              listStyle: 'none',
+              position: 'unset',
+            }}
+          >
+            {routes.map((prop, key) => {
+              return (
+                <NavLink
+                  to={prop.path}
+                  activeClassName={classes.active}
+                  key={key}
+                >
+                  <ListItemButton sx={listButtonStyle} alignItems='center' >
+                    <prop.icon
+                      sx={{
+                        width: '24px',
+                        height: '30px',
+                        fontSize: '24px',
+                        lineHeight: '30px',
+                        float: 'left',
+                        margin: '3px 15px auto 0px',
+                        textAlign: 'center',
+                        color: 'rgba(' + hexToRgb(whiteColor) + ', 0.8)',
+                        verticalAlign: 'middle'
+                      }}
+                    />
+                    <ListItemText
+                      primary={prop.name}
+                      className={classes.itemText}
+                      disableTypography={true}
+                    />
+                  </ListItemButton>
+                </NavLink>
+              );
+            })}
+          </List>
         </Box>
       </Drawer>
     </Fragment>

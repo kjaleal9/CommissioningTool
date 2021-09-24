@@ -10,7 +10,6 @@ import {
   FormControl,
   FormControlLabel,
   InputLabel,
-  Paper,
   Dialog,
   DialogContent,
   Snackbar,
@@ -94,27 +93,20 @@ export default function ProjectManagerScreen() {
   return (
     <Fragment>
       <Grid container direction='column'>
-        <Grid container component={Paper} style={{ marginBottom: '5em' }}>
-          <Grid
-            item
-            style={{ marginTop: '1em', marginLeft: '5em' }}
-            xs={12}
-            xl={4}
-          >
-            <Typography variant='h1'>Projects</Typography>
+        <Grid
+          container
+          direction='row'
+          sx={{ alignItems: 'center', justifyContent: 'space-between' }}
+        >
+          <Grid xl={4}>
+            <Typography variant='h2'>Projects</Typography>
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            xl={6}
-            style={{ marginTop: '3em', marginLeft: '5em' }}
-          >
+          <Grid item xs={12} xl={6}>
             <TextField
               placeholder='Search project details or create a new entry'
               style={{
-                width: '35em',
-                marginLeft: '5em',
+                width: '100%',
               }}
               InputProps={{
                 endAdornment: (
@@ -142,118 +134,104 @@ export default function ProjectManagerScreen() {
           maxWidth='xs'
         >
           <DialogContent>
-            <Grid container justify='center'>
+            <Grid container direction='column' sx={{ alignItems: 'center' }}>
+              <Grid item mb='1em'>
+                <Typography variant='h4'>Add a New Item</Typography>
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  sx={{ m: 1, width: 300 }}
+                  fullWidth
+                  label='Name'
+                  id='name'
+                  value={name}
+                  onChange={event => setName(event.target.value)}
+                />
+              </Grid>
+
               <Grid item>
-                <Typography variant='h1' gutterBottom>
-                  Add a new item
-                </Typography>
+                <Typography variant='h5'>Task Type</Typography>
               </Grid>
-            </Grid>
 
-            <Grid item>
-              <Grid item container direction='column' sm>
-                <Grid item>
-                  <TextField
-                    fullWidth
-                    label='Name'
-                    id='name'
-                    value={name}
-                    onChange={event => setName(event.target.value)}
-                  />
-                </Grid>
-                <Grid item></Grid>
-                <Grid
-                  item
-                  container
-                  direction='column'
-                  style={{ marginTop: '5em' }}
-                  alignItems='center'
+              <Grid item mb='1em'>
+                <RadioGroup
+                  aria-label='TaskType'
+                  name='taskType'
+                  value={taskType}
+                  onChange={event => setTaskType(event.target.value)}
                 >
-                  <Grid item>
-                    <Typography variant='h4'>Task Type</Typography>
-                  </Grid>
-                  <Grid item>
-                    <Grid item>
-                      <RadioGroup
-                        aria-label='TaskType'
-                        name='taskType'
-                        value={taskType}
-                        onChange={event => setTaskType(event.target.value)}
-                      >
-                        <FormControlLabel
-                          classes={{
-                            label: classes.service,
-                          }}
-                          value='Control Module'
-                          label='Control Module'
-                          control={<Radio />}
-                        />
-                        <FormControlLabel
-                          classes={{
-                            label: classes.service,
-                          }}
-                          value='Phase'
-                          label='Phase'
-                          control={<Radio />}
-                        />
-                        <FormControlLabel
-                          classes={{
-                            label: classes.service,
-                          }}
-                          value='Other'
-                          label='Other'
-                          control={<Radio />}
-                        />
-                      </RadioGroup>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item style={{ marginTop: '5em' }}>
-                  <FormControl className={classes.formControl}>
-                    <InputLabel id='platforms-label'>Device Type</InputLabel>
-                    <Select
-                      labelId='deviceTypes'
-                      style={{ width: '20em' }}
-                      id='deviceTypes'
-                      fullWidth
-                      displayEmpty
-                      value={deviceType}
-                      onChange={event => setDeviceType(event.target.value)}
-                    >
-                      {cmTypes.map(option => (
-                        <MenuItem key={option.name} value={option.name}>
-                          {option.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item style={{ marginTop: '5em' }}>
-                  <FormControl className={classes.formControl}>
-                    <InputLabel id='platforms-label'>Area</InputLabel>
-                    <Select
-                      labelId='areas'
-                      style={{ width: '20em' }}
-                      id='area'
-                      fullWidth
-                      displayEmpty
-                      value={area}
-                      onChange={event => setArea(event.target.value)}
-                    >
-                      {areas.map(option => (
-                        <MenuItem key={option.name} value={option.name}>
-                          {option.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
+                  <FormControlLabel
+                    classes={{
+                      label: classes.service,
+                    }}
+                    value='Control Module'
+                    label='Control Module'
+                    control={<Radio />}
+                  />
+                  <FormControlLabel
+                    classes={{
+                      label: classes.service,
+                    }}
+                    value='Phase'
+                    label='Phase'
+                    control={<Radio />}
+                  />
+                  <FormControlLabel
+                    classes={{
+                      label: classes.service,
+                    }}
+                    value='Other'
+                    label='Other'
+                    control={<Radio />}
+                  />
+                </RadioGroup>
+              </Grid>
+
+              <Grid item style={{ marginTop: '1em' }}>
+                <FormControl required sx={{ m: 1, width: 300 }}>
+                  <InputLabel id='device-types-label'>Device Type</InputLabel>
+                  <Select
+                    labelId='deviceTypes'
+                    id='deviceTypes'
+                    fullWidth
+                    displayEmpty
+                    value={deviceType}
+                    onChange={event => setDeviceType(event.target.value)}
+                  >
+                    {cmTypes.map(option => (
+                      <MenuItem key={option.name} value={option.name}>
+                        {option.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item style={{ marginTop: '1em' }}>
+                <FormControl required sx={{ m: 1, width: 300 }}>
+                  <InputLabel id='areas-label'>Area</InputLabel>
+                  <Select
+                    labelId='areas'
+                    id='area'
+                    fullWidth
+                    displayEmpty
+                    value={area}
+                    onChange={event => setArea(event.target.value)}
+                  >
+                    {areas.map(option => (
+                      <MenuItem key={option.name} value={option.name}>
+                        {option.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </Grid>
             </Grid>
-
             <Grid
               container
+              direction='row'
               justify='center'
+              alignItems='center'
               style={{ marginTop: '3em', marginBottom: '2em' }}
             >
               <Grid item>
