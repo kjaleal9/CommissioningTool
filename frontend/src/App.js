@@ -70,7 +70,7 @@ function App({ ...rest }) {
         suppressScrollX: true,
         suppressScrollY: false,
       });
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'auto';
     }
     window.addEventListener('resize', resizeFunction);
     // Specify how to clean up after this effect:
