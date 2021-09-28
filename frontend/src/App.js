@@ -8,6 +8,7 @@ import {
 
 // import './styles/styles.scss';
 
+// Solve scrollbar issues
 // creates a beautiful scrollbar
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
