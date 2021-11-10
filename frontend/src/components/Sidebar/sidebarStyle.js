@@ -55,6 +55,7 @@ const sidebarStyle = theme => ({
     position: 'relative',
     padding: '15px 15px',
     zIndex: '4',
+
     '&:after': {
       content: '""',
       position: 'absolute',
@@ -72,9 +73,9 @@ const sidebarStyle = theme => ({
     padding: '5px 0',
     display: 'block',
     fontSize: '18px',
-    textAlign: 'left',
+    textAlign: 'center',
     fontWeight: '400',
-    lineHeight: '30px',
+    lineHeight: '10px',
     textDecoration: 'none',
     backgroundColor: 'transparent',
     '&,&:hover': {

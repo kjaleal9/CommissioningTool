@@ -73,6 +73,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	table: {
 		minWidth: 600,
+
 	},
 	visuallyHidden: {
 		border: 0,
@@ -296,21 +297,21 @@ const CustomTable = ({ rows, handleAdd }) => {
 											</TableCell>
 											<TableCell align='left'>{row.area}</TableCell>
 											<TableCell align='left'>{row.deviceType}</TableCell>
-											<TableCell align='left'>
+											<TableCell align='left' padding='none'>
 												{row.status.completed && (
-													<DoneIcon style={{ color: green[500] }} />
+													<DoneIcon style={{ color: green[500] }} sx={{ fontSize: 25 }}/>
 												)}
 												{row.status.mechanical && !row.status.completed && (
-													<BuildIcon color='action' fontSize='small' />
+													<BuildIcon color='action' sx={{ fontSize: 25 }} />
 												)}
 												{row.status.automation && !row.status.completed && (
 													<SportsEsportsIcon
 														color='action'
-														fontSize='small'
+														sx={{ fontSize: 25 }}
 													/>
 												)}
 												{row.status.electrical && !row.status.completed && (
-													<FlashOnIcon color='action' fontSize='small' />
+													<FlashOnIcon color='action' sx={{ fontSize: 25 }} />
 												)}
 											</TableCell>
 										</TableRow>

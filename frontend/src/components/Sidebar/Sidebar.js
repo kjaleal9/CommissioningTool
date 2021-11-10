@@ -60,13 +60,13 @@ export default function Sidebar(props) {
 
   var brand = (
     <div className={classes.logo}>
-      <a
+      {/* <a
         href='https://www.creative-tim.com?ref=mdr-sidebar'
         className={classNames(classes.logoLink)}
         target='_blank'
-      >
-        {logoText}
-      </a>
+      > */}
+        <h3 className={classes.logoLink}>{logoText}</h3>
+      {/* </a> */}
     </div>
   );
   return (
